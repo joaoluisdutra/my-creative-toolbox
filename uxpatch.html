@@ -1,0 +1,1064 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UX Patch - Organizador de Projetos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Sync with style.css */
+            --bg-color: #fafbf8;
+            --bg-card: #FFFFFF;
+            --text-main: #212427;
+            --text-muted: #7d837a;
+            --border-color: #e0e3da;
+            --panel-soft: #eef0e8;
+            --accent: #d8f571;
+            --accent-blue: #d8f571;
+            --accent-pink: #d8f571;
+            --accent-orange: #d8f571;
+            --accent-green: #d8f571;
+            --day1: #d8f571;
+            --day2: #d8f571;
+            --day3: #d8f571;
+            --day4: #d8f571;
+            --day5: #d8f571;
+            --font-main: 'Manrope', sans-serif;
+            --font-serif: 'DM Serif Display', serif;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --radius: 12px;
+            --section-gap: 64px;
+        }
+
+        body.dark-theme {
+            --bg-color: #1A1A1A;
+            --bg-card: #212427;
+            --text-main: #FFFFFF;
+            --text-muted: #CCCCCC;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            line-height: 1.5;
+            transition: background-color 0.3s ease;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('assets/bg2.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Glassmorphism Navbar */
+        .navbar {
+            position: fixed;
+            top: 0; width: 100%; height: 64px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body.dark-theme .navbar {
+            background: rgba(28, 28, 30, 0.7);
+        }
+
+        .nav-content {
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 2rem;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: var(--accent-blue);
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        header {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Floating Action Nav */
+        .nav-sprint {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            position: sticky;
+            top: 1rem;
+            z-index: 100;
+            margin-bottom: 3rem;
+        }
+
+        .nav-link {
+            background: var(--bg-card);
+            padding: 0.75rem 1.4rem;
+            border-radius: 20px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 700;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .nav-link:hover { 
+            transform: translateY(-3px); 
+            border-color: var(--nav-accent, var(--accent-blue)); 
+            color: var(--nav-accent, var(--accent-blue));
+            box-shadow: 0 8px 20px rgba(16, 17, 18, 0.08);
+        }
+
+        .nav-sprint .nav-link:nth-child(4n + 1) { --nav-accent: var(--accent-green); }
+        .nav-sprint .nav-link:nth-child(4n + 2) { --nav-accent: var(--accent-blue); }
+        .nav-sprint .nav-link:nth-child(4n + 3) { --nav-accent: var(--accent-orange); }
+        .nav-sprint .nav-link:nth-child(4n) { --nav-accent: var(--accent-pink); }
+
+        section {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            margin-bottom: 4rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--card-shadow);
+        }
+
+        .phase-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 8px;
+            color: #FFFFFF;
+            font-weight: 800;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        h2 { 
+            font-family: var(--font-serif);
+            font-size: 2.2rem; 
+            margin: 0.5rem 0; 
+            letter-spacing: -0.01em; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 2.5rem;
+        }
+
+        @media (max-width: 850px) { .grid { grid-template-columns: 1fr; } }
+
+        h3 { 
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.05em; 
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+            font-weight: 800;
+        }
+
+        .decision-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .decision-item:last-child { border-bottom: none; }
+
+        .decision-content { flex: 1; }
+
+        .decision-content strong { color: var(--text-main); font-weight: 700; }
+
+        /* Tool Accordions (Dropdowns) */
+        details {
+            background: var(--bg-color);
+            border-radius: 10px;
+            margin-bottom: 0.6rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        details[open] {
+            background: var(--bg-card);
+            box-shadow: var(--card-shadow);
+        }
+
+        summary {
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.8rem;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-main);
+            outline: none;
+        }
+
+        summary::-webkit-details-marker { display: none; }
+
+        summary::after {
+            content: '\2304'; /* Unicode down arrow */
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            transition: transform 0.2s ease;
+        }
+
+        details[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .tool-content {
+            padding: 0 1rem 1rem 1rem;
+            font-size: 0.75rem;
+            line-height: 1.5;
+            color: var(--text-muted);
+        }
+
+        .tool-content p { margin: 0; }
+
+        .market-section { background: #1A1A1A; color: #FFFFFF; }
+        .market-section .decision-item { background: #212427; color: #CCCCCC; }
+
+        /* Alternância de botão minimalista (Sync from style.css) */
+        .theme-btn {
+            background: #F4F4F4;
+            border: none;
+            width: 60px;
+            height: 30px;
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 0 4px;
+            transition: background-color 0.4s ease;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        body.dark-theme .theme-btn {
+            background: #212427;
+        }
+
+        .theme-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: #FF6B00;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s ease, box-shadow 0.4s ease;
+            z-index: 2;
+        }
+
+        body.dark-theme .theme-slider {
+            transform: translateX(30px);
+            background: #F0F0F0;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .theme-icon {
+            font-size: 14px;
+            z-index: 1;
+            user-select: none;
+            filter: grayscale(0.2);
+            opacity: 0.9;
+        }
+
+        /* Catalog identity sync with index.html */
+        :root {
+            --bg-color: #FAFAFA;
+            --bg-card: #FFFFFF;
+            --text-main: #212427;
+            --text-muted: #212427;
+            --border-color: #E0E0E0;
+            --panel-soft: #F4F4F4;
+            --panel-hover: #F0F0F0;
+            --accent: #B0D411;
+            --accent-blue: #4A90E2;
+            --accent-pink: #FF2D55;
+            --accent-orange: #FF6B00;
+            --accent-green: #B0D411;
+            --day1: #B0D411;
+            --day2: #4A90E2;
+            --day3: #FF6B00;
+            --day4: #FF2D55;
+            --day5: #B0D411;
+            --card-shadow: 0 1px 0 rgba(33, 36, 39, 0.05), 0 12px 28px rgba(33, 36, 39, 0.04);
+            --radius: 16px;
+        }
+
+        html {
+            scroll-padding-top: 20px;
+            background: var(--bg-color);
+        }
+
+        body {
+            min-height: 100vh;
+            padding: 18px 22px 48px 288px;
+            background: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            display: none;
+        }
+
+        .navbar {
+            top: 8px;
+            left: 8px;
+            bottom: 8px;
+            width: 216px;
+            height: auto;
+            padding: 10px;
+            align-items: stretch;
+            justify-content: flex-start;
+            background: rgba(255, 255, 255, 0.82);
+            border: 1px solid var(--border-color);
+            border-radius: 22px;
+            box-shadow: 0 18px 45px rgba(16, 17, 18, 0.08);
+            overflow: hidden;
+        }
+
+        .nav-content {
+            width: 100%;
+            max-width: none;
+            min-height: 100%;
+            padding: 0;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: stretch;
+            gap: 14px;
+        }
+
+        .back-link {
+            min-height: 38px;
+            border-radius: 18px;
+            color: #FFFFFF;
+            background: #212427;
+            text-decoration: none;
+            display: grid;
+            grid-template-columns: 24px 1fr;
+            align-items: center;
+            gap: 8px;
+            padding: 0 12px;
+            font-size: 0.84rem;
+            font-weight: 800;
+            text-transform: none;
+            letter-spacing: 0;
+            box-shadow: 0 10px 22px rgba(16, 17, 18, 0.15);
+        }
+
+        .back-link::before {
+            content: "UX";
+            width: 18px;
+            height: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.66rem;
+            font-weight: 900;
+        }
+
+        .theme-btn {
+            display: none;
+        }
+
+        .nav-sprint {
+            position: fixed;
+            top: 68px;
+            left: 18px;
+            bottom: 18px;
+            z-index: 2100;
+            width: 196px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 2px;
+            overflow-y: auto;
+        }
+
+        .nav-sprint::before {
+            content: "Sprint";
+            margin: 8px 8px 6px;
+            color: #CCCCCC;
+            font-size: 0.64rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .nav-sprint .nav-link {
+            min-height: 38px;
+            border-radius: 18px;
+            color: #212427;
+            background: transparent;
+            box-shadow: none;
+            border: 0;
+            padding: 0 12px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            font-size: 0.84rem;
+            font-weight: 700;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .nav-sprint .nav-link:hover {
+            transform: none;
+            color: var(--text-main);
+            background: color-mix(in srgb, var(--nav-accent, var(--accent-green)) 10%, transparent);
+            box-shadow: none;
+        }
+
+        header {
+            max-width: none;
+            padding: 0 0 22px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 24px;
+        }
+
+        header h1 {
+            font-family: var(--font-main);
+            font-size: 1.6rem;
+            line-height: 1.15;
+            margin: 0 0 6px;
+            letter-spacing: 0;
+        }
+
+        header p {
+            max-width: 720px;
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .container {
+            max-width: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        section {
+            --phase-accent: var(--accent-green);
+            background: transparent;
+            border: 0;
+            border-radius: 0;
+            box-shadow: none;
+            padding: 0;
+            margin-bottom: 32px;
+        }
+
+        #day1 { --phase-accent: var(--accent-green); }
+        #day2 { --phase-accent: var(--accent-blue); }
+        #day3 { --phase-accent: var(--accent-orange); }
+        #day4 { --phase-accent: var(--accent-pink); }
+        #day5 { --phase-accent: var(--accent-green); }
+
+        .phase-header {
+            margin-bottom: 14px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .phase-badge {
+            color: var(--text-main);
+            background: var(--panel-soft) !important;
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            padding: 4px 10px;
+            font-size: 0.68rem;
+            letter-spacing: 0;
+            text-transform: none;
+        }
+
+        h2 {
+            font-family: var(--font-main);
+            font-size: 0.98rem;
+            font-weight: 800;
+            margin: 10px 0 4px;
+            letter-spacing: 0;
+        }
+
+        .phase-description {
+            margin: 0 0 12px;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: minmax(260px, 1.05fr) minmax(240px, 0.95fr);
+            gap: 12px;
+        }
+
+        .grid > div {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            box-shadow: var(--card-shadow);
+            padding: 14px;
+            min-width: 0;
+        }
+
+        h3 {
+            color: #CCCCCC;
+            font-size: 0.64rem;
+            letter-spacing: 0.08em;
+            margin: 0 0 10px;
+        }
+
+        .decision-item {
+            min-height: 44px;
+            padding: 10px 0;
+            font-size: 0.82rem;
+            border-bottom-color: var(--border-color);
+            align-items: flex-start;
+            gap: 0;
+        }
+
+        .decision-content {
+            flex: 1;
+            color: #212427;
+            line-height: 1.45;
+        }
+
+        .decision-content strong,
+        .decision-item > strong {
+            display: block;
+            margin-bottom: 2px;
+            color: var(--text-main);
+            font-size: 0.84rem;
+            font-weight: 800;
+        }
+
+        .decision-item > strong {
+            margin-right: 4px;
+        }
+
+        details {
+            background: var(--panel-soft);
+            border-radius: 12px;
+            border-color: var(--border-color);
+            box-shadow: none;
+        }
+
+        details[open] {
+            background: var(--bg-card);
+            border-color: var(--border-color);
+            box-shadow: var(--card-shadow);
+        }
+
+        summary {
+            min-height: 42px;
+            padding: 0 12px;
+            font-size: 0.82rem;
+        }
+
+        summary::after {
+            content: "+";
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 800;
+        }
+
+        details[open] summary::after {
+            transform: rotate(45deg);
+        }
+
+        .tool-content {
+            padding: 0 12px 12px;
+            font-size: 0.78rem;
+        }
+
+        footer {
+            margin: 0;
+        }
+
+        /* Shared toolbox identity */
+        html { scroll-padding-top: 100px; }
+        body { background: var(--bg-color); color: var(--text-main); padding: 36px 36px 48px 284px; }
+        body::before { display: none; }
+        .navbar {
+            top: 0; left: 0; right: auto; bottom: 0; width: 248px; height: auto;
+            justify-content: flex-start; border: 0; border-right: 1px solid var(--border-color);
+            border-radius: 0; background: var(--bg-color); backdrop-filter: none; box-shadow: none;
+        }
+        .nav-content {
+            width: 100%; max-width: none; height: 100%; padding: 0 17px 20px;
+            flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 16px;
+        }
+        .nav-brand {
+            min-height: 93px; padding: 0 12px; display: grid; grid-template-columns: 84px 1fr;
+            gap: 0; align-items: center; color: var(--text-main); text-decoration: none;
+            background: transparent; box-shadow: none; border-radius: 0;
+        }
+        .nav-brand-icon { width: 84px; height: 84px; object-fit: contain; }
+        .brand-wordmark { margin-left: -4px; color: var(--text-main); font-size: 12px; line-height: 1.3; }
+        .brand-wordmark strong { display: block; font-size: 21px; letter-spacing: -.6px; }
+        .back-link {
+            display: flex; align-items: center; min-height: 43px; padding: 0 12px;
+            border-radius: 9px; background: var(--panel-soft); color: #29301c;
+            font-size: 12px; font-weight: 700; text-transform: none; letter-spacing: 0;
+        }
+        .back-link::before { content: '↖'; margin-right: 10px; font-size: 15px; }
+        header { padding: 6px 0 28px; margin-bottom: var(--section-gap); text-align: left; }
+        header::before { content: 'UX PATCH  /  GUIA DE DECISÃO'; display: block; margin-bottom: 14px; color: var(--text-muted); font-size: 9px; letter-spacing: 2px; }
+        header h1 { font-family: var(--font-main); font-size: clamp(32px, 3.2vw, 46px); font-weight: 600; line-height: 1.13; letter-spacing: -1.8px; }
+        header p { max-width: 620px; color: var(--text-muted); font-size: 12px; line-height: 1.7; }
+        .container { max-width: none; padding: 0; }
+        .nav-sprint {
+            position: sticky; top: 16px; left: auto; right: auto; bottom: auto; z-index: 100;
+            width: auto; flex-direction: row; flex-wrap: wrap; justify-content: flex-start;
+            gap: 8px; overflow: visible; margin: 0 0 30px; padding: 0;
+        }
+        .nav-sprint .nav-link, .nav-link {
+            padding: 9px 13px; border: 1px solid var(--border-color); border-radius: 9px;
+            background: var(--bg-card); color: var(--text-main); box-shadow: none;
+            font-size: 11px; font-weight: 600; text-transform: none; letter-spacing: 0;
+        }
+        .sprint-card { overflow: hidden; margin-bottom: var(--section-gap); border: 1px solid var(--border-color); border-radius: 14px; background: var(--bg-card); }
+        .nav-sprint {
+            position: static; top: auto; z-index: auto; flex-wrap: nowrap; gap: 0; overflow-x: auto;
+            margin: 0; padding: 0 16px; border-bottom: 1px solid var(--border-color); scrollbar-width: thin;
+        }
+        .nav-sprint::before { display: none; }
+        .nav-sprint .nav-link {
+            flex: 0 0 auto; min-height: 52px; padding: 0 14px; border: 0; border-radius: 0;
+            border-bottom: 2px solid transparent; background: transparent; color: var(--text-muted);
+            cursor: pointer; font: inherit; font-size: 11px; white-space: nowrap;
+        }
+        .nav-sprint .nav-link:hover { transform: none; border-bottom-color: #c9d99b; background: transparent; color: var(--text-main); box-shadow: none; }
+        .nav-sprint .nav-link[aria-selected="true"] { border-bottom-color: #a6be65; color: var(--text-main); font-weight: 700; }
+        .sprint-card section[role="tabpanel"] { margin: 0; padding: 20px; background: var(--bg-card); }
+        .sprint-card section[hidden] { display: none; }
+        section { margin-bottom: 28px; }
+        .phase-header { padding-bottom: 12px; }
+        .phase-badge { color: #29301c; background: var(--accent) !important; border: 0; border-radius: 5px; font-weight: 700; }
+        h2 { color: var(--text-main); font-family: var(--font-main); font-size: 18px; font-weight: 700; }
+        .phase-description { color: var(--text-muted); }
+        .grid { gap: 14px; }
+        .grid > div { border-radius: 13px; box-shadow: none; }
+        h3 { color: var(--text-muted); }
+        .decision-content { color: var(--text-muted); }
+        details, details[open] { border-radius: 9px; box-shadow: none; }
+        .market-section, .market-section .decision-item { background: var(--bg-card); color: var(--text-main); }
+        footer { padding: 30px 0 !important; color: var(--text-muted) !important; }
+
+        @media (max-width: 900px) {
+            body {
+                padding: 88px 14px 36px;
+            }
+
+            .navbar {
+                right: 8px;
+                bottom: auto;
+                width: auto;
+                height: 64px;
+                border-radius: 22px;
+            }
+
+            .nav-content {
+                min-height: 0;
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .back-link {
+                min-width: 156px;
+            }
+
+            .nav-sprint {
+                position: static;
+                width: auto;
+                flex-direction: row;
+                overflow-x: auto;
+                margin-bottom: 20px;
+                padding-bottom: 4px;
+            }
+
+            .nav-sprint::before {
+                display: none;
+            }
+
+            .nav-sprint .nav-link {
+                flex: 0 0 auto;
+                background: var(--bg-card);
+                border: 1px solid var(--border-color);
+            }
+
+            .grid,
+            .grid[style] {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        @media (max-width: 900px) {
+            body { padding: 36px 22px 36px 202px; }
+            .navbar { right: auto; bottom: 0; width: 180px; height: auto; border-radius: 0; }
+            .nav-content { min-height: 0; flex-direction: column; align-items: stretch; }
+            .nav-brand { width: auto; min-height: 72px; grid-template-columns: 58px 1fr; }
+            .nav-brand-icon { width: 58px; height: 58px; }
+            .brand-wordmark { margin-left: -5px; }
+            .back-link { min-width: 0; }
+            header { padding-top: 6px; }
+        }
+        @media (max-width: 600px) {
+            body { padding: 104px 18px 28px; }
+            .navbar { width: 100%; height: 72px; bottom: auto; border-right: 0; border-bottom: 1px solid var(--border-color); }
+            .nav-content { height: 72px; padding: 0 12px; flex-direction: row; align-items: center; justify-content: space-between; }
+            .nav-brand { width: auto; min-height: 72px; grid-template-columns: 58px auto; padding: 0; }
+            .nav-brand-icon { width: 58px; height: 58px; }
+            .brand-wordmark { margin-left: -5px; }
+            .back-link { min-height: 38px; padding: 0 10px; }
+            .nav-sprint { position: static; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 5px; }
+            .nav-sprint .nav-link { flex: 0 0 auto; }
+            header h1 { font-size: 34px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.html" class="nav-brand">
+                <img class="nav-brand-icon" src="assets/logo.png" alt="">
+                <span class="brand-wordmark">my creative<strong>toolbox.</strong></span>
+            </a>
+            <a href="index.html" class="back-link">Voltar para Toolbox</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>UX Project Patch</h1>
+        <p>Guia de decisão para escolher métodos e ferramentas ao longo de um projeto de UX Design baseado em design thinking.</p>
+    </header>
+
+    <div class="container">
+        <div class="sprint-card">
+            <nav class="nav-sprint" role="tablist" aria-label="Dias do UX Project Patch">
+                <button type="button" id="tab-day1" class="nav-link" role="tab" aria-controls="day1" aria-selected="true" tabindex="0">Dia 1 · Empatizar</button>
+                <button type="button" id="tab-day2" class="nav-link" role="tab" aria-controls="day2" aria-selected="false" tabindex="-1">Dia 2 · Definir</button>
+                <button type="button" id="tab-day3" class="nav-link" role="tab" aria-controls="day3" aria-selected="false" tabindex="-1">Dia 3 · Idear</button>
+                <button type="button" id="tab-day4" class="nav-link" role="tab" aria-controls="day4" aria-selected="false" tabindex="-1">Dia 4 · Prototipar</button>
+                <button type="button" id="tab-day5" class="nav-link" role="tab" aria-controls="day5" aria-selected="false" tabindex="-1">Dia 5 · Testar</button>
+            </nav>
+
+        <!-- DIA 1: EMPATIZAR -->
+        <section id="day1" role="tabpanel" aria-labelledby="tab-day1" tabindex="0">
+            <div class="phase-header">
+                <span class="phase-badge" style="background: var(--day1);">Dia 1: Understand</span>
+                <h2>Empatizar</h2>
+                <p class="phase-description">Entenda as necessidades, comportamentos e dores dos usuários por meio da pesquisa primária.</p>
+            </div>
+            <div class="grid">
+                <div>
+                    <h3>Perguntas de decisão</h3>
+                    <div class="decision-item">
+                        <div class="decision-content"><strong>Objetivo da Pesquisa:</strong> Quais perguntas guiarão o processo (5 Ws e H)?</div>
+                    </div>
+                    <div class="decision-item">
+                        <div class="decision-content"><strong>Recrutamento:</strong> Quem são os participantes reais (Inclusão por Padrão)?</div>
+                    </div>
+                    <div class="decision-item">
+                        <div class="decision-content"><strong>Ética:</strong> Como garantir privacidade e consentimento (NDA)?</div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Métodos e ferramentas</h3>
+                    <details>
+                        <summary>Mapeamento de Empatia</summary>
+                        <div class="tool-content">Gráfico usado para sintetizar o aprendizado sobre o usuário. Dividido em quadrantes: diz, pensa, faz e sente.</div>
+                    </details>
+                    <details>
+                        <summary>Roteiro de Entrevista</summary>
+                        <div class="tool-content">Documento estruturado com objetivos e perguntas diretas para guiar um diálogo imparcial.</div>
+                    </details>
+                    <details>
+                        <summary>Auditoria Competitiva</summary>
+                        <div class="tool-content">Análise de concorrentes diretos e indiretos para identificar forças, fraquezas e lacunas de mercado.</div>
+                    </details>
+                    <details>
+                        <summary>5 Ws e H</summary>
+                        <div class="tool-content">Investigação fundamental: Who, What, Where, When, Why e How para aprofundar problemas.</div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIA 2: DEFINIR -->
+        <section id="day2" role="tabpanel" aria-labelledby="tab-day2" tabindex="0" hidden>
+            <div class="phase-header">
+                <span class="phase-badge" style="background: var(--day2);">Dia 2: Define</span>
+                <h2>Definir</h2>
+                <p class="phase-description">Filtre as descobertas da pesquisa para definir o problema central e metas de design.</p>
+            </div>
+            <div class="grid">
+                <div>
+                    <h3>Perguntas de decisão</h3>
+                    <div class="decision-item">
+                        <div class="decision-content"><strong>Atrito Central:</strong> O problema é financeiro, de produto, processo ou suporte?</div>
+                    </div>
+                    <div class="decision-item">
+                        <div class="decision-content"><strong>Foco:</strong> Qual Problem Statement priorizar (Persona + Necessidade + Insight)?</div>
+                    </div>
+                    <div class="decision-item">
+                        <div class="decision-content"><strong>Proposta de Valor:</strong> Quais dores os concorrentes deixaram em aberto?</div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Métodos e ferramentas</h3>
+                    <details>
+                        <summary>User Personas</summary>
+                        <div class="tool-content">Perfis fictícios baseados em dados reais que representam comportamentos e objetivos.</div>
+                    </details>
+                    <details>
+                        <summary>User Journey Map</summary>
+                        <div class="tool-content">Visualização do caminho do usuário, destacando dores e oportunidades de melhoria.</div>
+                    </details>
+                    <details>
+                        <summary>Problem Statement</summary>
+                        <div class="tool-content">Fórmula: [Nome] é um [Perfil] que precisa de [Necessidade] porque [Insight].</div>
+                    </details>
+                    <details>
+                        <summary>User Stories</summary>
+                        <div class="tool-content">Descrições curtas: Como [usuário], eu quero [ação] para [resultado].</div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIA 3: IDEAR -->
+        <section id="day3" role="tabpanel" aria-labelledby="tab-day3" tabindex="0" hidden>
+            <div class="phase-header">
+                <span class="phase-badge" style="background: var(--day3);">Dia 3: Ideate</span>
+                <h2>Idear</h2>
+                <p class="phase-description">Fase de brainstorming e geração em massa de soluções criativas para resolver os problemas definidos.</p>
+            </div>
+            <div class="grid">
+                <div>
+                    <h3>Perguntas de decisão</h3>
+                    <div class="decision-item">
+                        <div class="decision-content"><strong>Oportunidades:</strong> Como reframear problemas em perguntas abertas (HMW)?</div>
+                    </div>
+                    <div class="decision-item">
+                        <div class="decision-content"><strong>Inclusão:</strong> Como mitigar vieses cognitivos na ideação?</div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Métodos e ferramentas</h3>
+                    <details>
+                        <summary>How Might We (HMW)</summary>
+                        <div class="tool-content">Transforma problemas em perguntas: "Como nós poderíamos...", abrindo espaço para soluções.</div>
+                    </details>
+                    <details>
+                        <summary>Crazy Eights</summary>
+                        <div class="tool-content">Esboço rápido de oito ideias em oito minutos, priorizando quantidade e instinto.</div>
+                    </details>
+                    <details>
+                        <summary>SCAMPER</summary>
+                        <div class="tool-content">Substituir, Combinar, Adaptar, Modificar, Outro uso, Eliminar ou Reorganizar elementos.</div>
+                    </details>
+                    <details>
+                        <summary>Storyboards</summary>
+                        <div class="tool-content"><strong>Big Picture:</strong> Foca na experiência macro e emoções. <strong>Close-up:</strong> Detalhes mecânicos da interface.</div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIA 4: PROTOTIPAR -->
+        <section id="day4" role="tabpanel" aria-labelledby="tab-day4" tabindex="0" hidden>
+            <div class="phase-header">
+                <span class="phase-badge" style="background: var(--day4);">Dia 4: Prototype</span>
+                <h2>Prototipar</h2>
+                <p class="phase-description">Fase onde as ideias ganham formas físicas ou digitais testáveis e estruturadas.</p>
+            </div>
+            <div class="grid">
+                <div>
+                    <h3>Perguntas de decisão</h3>
+                    <div class="decision-item">
+                        <div class="decision-content"><strong>Arquitetura:</strong> Como organizar a hierarquia e sitemaps?</div>
+                    </div>
+                    <div class="decision-item">
+                        <div class="decision-content"><strong>Fidelidade:</strong> Lo-Fi para validar fluxo ou Hi-Fi para visual?</div>
+                    </div>
+                    <div class="decision-item">
+                        <div class="decision-content"><strong>Consistência:</strong> Usar um Design System ou Master Components?</div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Métodos e ferramentas</h3>
+                    <details>
+                        <summary>Sitemaps / IA</summary>
+                        <div class="tool-content">Planta visual que conecta as páginas de maneira lógica, mapeando a estrutura organizacional.</div>
+                    </details>
+                    <details>
+                        <summary>Wireframes</summary>
+                        <div class="tool-content">Esboços estruturais de baixa fidelidade para definir layout e hierarquia sem focar no visual.</div>
+                    </details>
+                    <details>
+                        <summary>Design Systems</summary>
+                        <div class="tool-content">Padrões reutilizáveis (Apple HIG / Material) que garantem consistência e eficiência.</div>
+                    </details>
+                    <details>
+                        <summary>Figma (Auto Layout/Variants)</summary>
+                        <div class="tool-content">Recursos para criar designs responsivos e agrupar diferentes estados de componentes.</div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIA 5: TESTAR -->
+        <section id="day5" role="tabpanel" aria-labelledby="tab-day5" tabindex="0" hidden>
+            <div class="phase-header">
+                <span class="phase-badge" style="background: var(--day5);">Dia 5: Test</span>
+                <h2>Testar</h2>
+                <p class="phase-description">Teste as soluções com usuários reais para validar funcionalidades e identificar ajustes.</p>
+            </div>
+            <div class="grid">
+                <div>
+                    <h3>Perguntas de decisão</h3>
+                    <div class="decision-item">
+                        <div class="decision-content"><strong>Método:</strong> Teste moderado (qualitativo) ou não-moderado?</div>
+                    </div>
+                    <div class="decision-item">
+                        <div class="decision-content"><strong>Métricas:</strong> Como medir sucesso (SUS, Tempo, Taxa de Erro)?</div>
+                    </div>
+                    <div class="decision-item">
+                        <div class="decision-content"><strong>Priorização:</strong> Quais falhas (P0, P1, P2) corrigir agora?</div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Métodos e ferramentas</h3>
+                    <details>
+                        <summary>Estudo de Usabilidade</summary>
+                        <div class="tool-content">Usuários interagem com o protótipo enquanto pesquisadores observam barreiras e facilidades.</div>
+                    </details>
+                    <details>
+                        <summary>Diagrama de Afinidade</summary>
+                        <div class="tool-content">Organização de feedbacks em clusters temáticos para identificar problemas recorrentes.</div>
+                    </details>
+                    <details>
+                        <summary>System Usability Scale (SUS)</summary>
+                        <div class="tool-content">Questionário de 10 perguntas para medir quantitativamente a facilidade de uso do sistema.</div>
+                    </details>
+                    <details>
+                        <summary>Think-Aloud Method</summary>
+                        <div class="tool-content">O participante verbaliza pensamentos e decisões enquanto navega, expondo modelos mentais.</div>
+                    </details>
+                </div>
+            </div>
+        </section>
+        </div>
+
+        <!-- Seção Final: Ética -->
+        <section>
+            <h2>Pilar Transversal: Ética e Responsabilidade</h2>
+            <p>Decisões que devem acompanhar todos os dias da Sprint:</p>
+            <div class="grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="decision-item"><strong>Antivieses:</strong> Combater viés de confirmação e simpatia.</div>
+                <div class="decision-item"><strong>Inclusão:</strong> Design para o bem social e populações sub-representadas.</div>
+                <div class="decision-item"><strong>Anti-Deceptive Patterns:</strong> Banir custos ocultos e confirmshaming.</div>
+            </div>
+            <div style="margin-top: 2rem;">
+                <details>
+                    <summary>Análise Pré-Mortem</summary>
+                    <div class="tool-content">Imagine que o projeto falhou no futuro e liste as razões éticas e técnicas para corrigi-las agora.</div>
+                </details>
+                <details>
+                    <summary>Design Multiversal</summary>
+                    <div class="tool-content">Projeta respeitando realidades culturais e sociais diversas (Next Billion Users).</div>
+                </details>
+                <details>
+                    <summary>Taxonomia de Dark Patterns</summary>
+                    <div class="tool-content">Identificação e banimento de interfaces projetadas para enganar ou forçar o usuário.</div>
+                </details>
+            </div>
+        </section>
+    </div>
+
+    <footer style="text-align: center; padding: 4rem; color: var(--text-muted); font-size: 0.8rem;">
+        &copy; 2024 My Creative Toolbox - UX Strategy Guide
+    </footer>
+
+    <script>
+        const dayTabs = Array.from(document.querySelectorAll('[role="tab"]'));
+        const dayPanels = dayTabs.map(tab => document.getElementById(tab.getAttribute('aria-controls')));
+
+        function selectDayTab(selectedTab, moveFocus = false) {
+            dayTabs.forEach((tab, index) => {
+                const selected = tab === selectedTab;
+                tab.setAttribute('aria-selected', String(selected));
+                tab.tabIndex = selected ? 0 : -1;
+                dayPanels[index].hidden = !selected;
+            });
+            if (moveFocus) selectedTab.focus();
+        }
+
+        dayTabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => selectDayTab(tab));
+            tab.addEventListener('keydown', event => {
+                let nextIndex = index;
+                if (event.key === 'ArrowRight') nextIndex = (index + 1) % dayTabs.length;
+                else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + dayTabs.length) % dayTabs.length;
+                else if (event.key === 'Home') nextIndex = 0;
+                else if (event.key === 'End') nextIndex = dayTabs.length - 1;
+                else return;
+                event.preventDefault();
+                selectDayTab(dayTabs[nextIndex], true);
+            });
+        });
+    </script>
+
+</body>
+</html>
+
