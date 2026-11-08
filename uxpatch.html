@@ -31,15 +31,17 @@
             --font-serif: 'DM Serif Display', serif;
             --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             --radius: 12px;
-            --section-gap: 64px;
+            --section-gap: 56px;
         }
 
         body.dark-theme {
+            color-scheme: dark;
             --bg-color: #1A1A1A;
             --bg-card: #212427;
             --text-main: #FFFFFF;
             --text-muted: #CCCCCC;
             --border-color: rgba(255, 255, 255, 0.1);
+            --panel-soft: #2B2F32;
             --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
 
@@ -264,6 +266,27 @@
         .market-section { background: #1A1A1A; color: #FFFFFF; }
         .market-section .decision-item { background: #212427; color: #CCCCCC; }
 
+        .ux-laws-section { scroll-margin-top: 24px; }
+        .ux-laws-section::before,
+        #etica-acessibilidade::before { content: ''; display: block; width: 96px; height: 1px; margin: 80px auto; border-radius: 999px; background: var(--accent); }
+        .ux-laws-intro { max-width: 760px; color: var(--text-muted); font-size: 0.9rem; }
+        .ux-laws-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 30px; }
+        .ux-law-card { min-width: 0; padding: 20px; border: 1px solid var(--border-color); border-radius: 12px; background: var(--bg-color); }
+        .ux-law-card h3 { margin: 0 0 10px; color: var(--text-main); font-size: 0.95rem; letter-spacing: 0; text-transform: none; }
+        .ux-law-card p { margin: 0 0 12px; color: var(--text-muted); font-size: 0.78rem; line-height: 1.65; }
+        .ux-law-card p:last-child { margin-bottom: 0; }
+        .ux-law-card strong { color: var(--text-main); }
+        .section-heading { margin: 0 0 28px; padding: 0 0 20px; border-bottom: 1px solid var(--border-color); }
+        .section-heading-label { display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 10px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+        .section-heading h2 { margin: 0 0 8px; font-size: clamp(24px, 2.4vw, 32px); letter-spacing: -0.04em; }
+        .section-heading p { max-width: 720px; margin: 0; color: var(--text-muted); font-size: 13px; line-height: 1.7; }
+        .template-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .template-link { display: inline-flex; align-items: center; min-height: 36px; padding: 0 12px; border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-main); background: var(--bg-card); font-size: 0.75rem; font-weight: 700; text-decoration: none; }
+        .template-link:hover { border-color: #a6be65; }
+        .template-link-primary { border-color: var(--accent); background: var(--accent); color: #29301c; }
+        @media (max-width: 1100px) { .ux-laws-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (max-width: 600px) { .ux-laws-grid { grid-template-columns: 1fr; } }
+
         /* Alternância de botão minimalista (Sync from style.css) */
         .theme-btn {
             background: #F4F4F4;
@@ -465,7 +488,6 @@
             max-width: none;
             padding: 0 0 22px;
             text-align: left;
-            border-bottom: 1px solid var(--border-color);
             margin-bottom: 24px;
         }
 
@@ -646,16 +668,32 @@
         .nav-brand-icon { width: 84px; height: 84px; object-fit: contain; }
         .brand-wordmark { margin-left: -4px; color: var(--text-main); font-size: 12px; line-height: 1.3; }
         .brand-wordmark strong { display: block; font-size: 21px; letter-spacing: -.6px; }
+        .sidebar-page-info { padding: 8px 12px 16px; }
+        .sidebar-page-info h1 { margin: 0 0 8px; color: var(--text-main); font-size: 18px; font-weight: 700; line-height: 1.2; letter-spacing: -0.5px; }
+        .sidebar-page-info p { margin: 0; color: var(--text-muted); font-size: 11px; line-height: 1.6; }
         .back-link {
             display: flex; align-items: center; min-height: 43px; padding: 0 12px;
             border-radius: 9px; background: var(--panel-soft); color: #29301c;
             font-size: 12px; font-weight: 700; text-transform: none; letter-spacing: 0;
         }
         .back-link::before { content: '↖'; margin-right: 10px; font-size: 15px; }
-        header { padding: 6px 0 28px; margin-bottom: var(--section-gap); text-align: left; }
-        header::before { content: 'UX PATCH  /  GUIA DE DECISÃO'; display: block; margin-bottom: 14px; color: var(--text-muted); font-size: 9px; letter-spacing: 2px; }
-        header h1 { font-family: var(--font-main); font-size: clamp(32px, 3.2vw, 46px); font-weight: 600; line-height: 1.13; letter-spacing: -1.8px; }
-        header p { max-width: 620px; color: var(--text-muted); font-size: 12px; line-height: 1.7; }
+        .theme-toggle {
+            display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: flex-start; gap: 10px;
+            min-height: 42px; width: 100%; padding: 0 12px; border: 1px solid var(--border-color);
+            border-radius: 9px; background: var(--panel-soft); color: var(--text-main);
+            font: inherit; font-size: 12px; font-weight: 700; text-align: left; cursor: pointer;
+        }
+        .theme-toggle:hover { border-color: #a6be65; }
+        .theme-toggle-icon { font-size: 16px; line-height: 1; }
+        body.dark-theme .theme-toggle { background: var(--bg-card); }
+        body.dark-theme .back-link { background: var(--panel-soft); color: var(--text-main); }
+        body.dark-theme .nav-sprint .nav-link { color: var(--text-muted); }
+        body.dark-theme .nav-sprint .nav-link[aria-selected="true"] { color: var(--text-main); }
+        body.dark-theme .phase-description,
+        body.dark-theme .decision-content,
+        body.dark-theme .tool-content { color: var(--text-muted); }
+        body.dark-theme .decision-item { border-color: var(--border-color); }
+        body.dark-theme .phase-badge { color: #29301c; }
         .container { max-width: none; padding: 0; }
         .nav-sprint {
             position: sticky; top: 16px; left: auto; right: auto; bottom: auto; z-index: 100;
@@ -667,7 +705,7 @@
             background: var(--bg-card); color: var(--text-main); box-shadow: none;
             font-size: 11px; font-weight: 600; text-transform: none; letter-spacing: 0;
         }
-        .sprint-card { overflow: hidden; margin-bottom: var(--section-gap); border: 1px solid var(--border-color); border-radius: 14px; background: var(--bg-card); }
+        .sprint-card { overflow: hidden; margin-bottom: 24px; border: 1px solid var(--border-color); border-radius: 14px; background: var(--bg-card); }
         .nav-sprint {
             position: static; top: auto; z-index: auto; flex-wrap: nowrap; gap: 0; overflow-x: auto;
             margin: 0; padding: 0 16px; border-bottom: 1px solid var(--border-color); scrollbar-width: thin;
@@ -683,6 +721,7 @@
         .sprint-card section[role="tabpanel"] { margin: 0; padding: 20px; background: var(--bg-card); }
         .sprint-card section[hidden] { display: none; }
         section { margin-bottom: 28px; }
+        .container > section { margin-bottom: var(--section-gap); }
         .phase-header { padding-bottom: 12px; }
         .phase-badge { color: #29301c; background: var(--accent) !important; border: 0; border-radius: 5px; font-weight: 700; }
         h2 { color: var(--text-main); font-family: var(--font-main); font-size: 18px; font-weight: 700; }
@@ -750,23 +789,29 @@
             .nav-brand-icon { width: 58px; height: 58px; }
             .brand-wordmark { margin-left: -5px; }
             .back-link { min-width: 0; }
-            header { padding-top: 6px; }
+            .theme-toggle { width: 100%; }
         }
         @media (max-width: 600px) {
             body { padding: 104px 18px 28px; }
+            :root { --section-gap: 40px; }
             .navbar { width: 100%; height: 72px; bottom: auto; border-right: 0; border-bottom: 1px solid var(--border-color); }
             .nav-content { height: 72px; padding: 0 12px; flex-direction: row; align-items: center; justify-content: space-between; }
             .nav-brand { width: auto; min-height: 72px; grid-template-columns: 58px auto; padding: 0; }
             .nav-brand-icon { width: 58px; height: 58px; }
             .brand-wordmark { margin-left: -5px; }
             .back-link { min-height: 38px; padding: 0 10px; }
+            .sidebar-page-info { display: none; }
+            .theme-toggle { width: 38px; min-width: 38px; min-height: 38px; justify-content: center; padding: 0; }
+            .theme-toggle-label { display: none; }
             .nav-sprint { position: static; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 5px; }
             .nav-sprint .nav-link { flex: 0 0 auto; }
-            header h1 { font-size: 34px; }
         }
     </style>
 </head>
 <body>
+    <script>
+        try { if (localStorage.getItem('my-creative-box-theme') === 'dark') document.body.classList.add('dark-theme'); } catch (_) {}
+    </script>
 
     <nav class="navbar">
         <div class="nav-content">
@@ -774,16 +819,24 @@
                 <img class="nav-brand-icon" src="assets/logo.png" alt="">
                 <span class="brand-wordmark">my creative<strong>toolbox.</strong></span>
             </a>
+            <div class="sidebar-page-info">
+                <h1>UX Project Patch</h1>
+                <p>Guia de decisão para escolher métodos e ferramentas ao longo de um projeto de UX Design baseado em design thinking.</p>
+            </div>
             <a href="index.html" class="back-link">Voltar para Toolbox</a>
+            <button type="button" class="theme-toggle" aria-label="Ativar modo escuro" aria-pressed="false">
+                <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+                <span class="theme-toggle-label">Modo escuro</span>
+            </button>
         </div>
     </nav>
 
-    <header>
-        <h1>UX Project Patch</h1>
-        <p>Guia de decisão para escolher métodos e ferramentas ao longo de um projeto de UX Design baseado em design thinking.</p>
-    </header>
-
     <div class="container">
+        <div class="section-heading" aria-labelledby="sprint-title">
+            <span class="section-heading-label">Processo de UX</span>
+            <h2 id="sprint-title">SPRINT</h2>
+            <p>Explore as cinco etapas do projeto e os recursos que apoiam o trabalho ao longo da sprint.</p>
+        </div>
         <div class="sprint-card">
             <nav class="nav-sprint" role="tablist" aria-label="Dias do UX Project Patch">
                 <button type="button" id="tab-day1" class="nav-link" role="tab" aria-controls="day1" aria-selected="true" tabindex="0">Dia 1 · Empatizar</button>
@@ -817,19 +870,62 @@
                     <h3>Métodos e ferramentas</h3>
                     <details>
                         <summary>Mapeamento de Empatia</summary>
-                        <div class="tool-content">Gráfico usado para sintetizar o aprendizado sobre o usuário. Dividido em quadrantes: diz, pensa, faz e sente.</div>
+                        <div class="tool-content">
+                            <p>Ferramenta para sintetizar o que a pessoa usuária diz, pensa, faz e sente, ajudando a equipe a organizar aprendizados da pesquisa.</p>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/Empathy%20Map%20Template%20-%201.pdf" target="_blank" rel="noopener noreferrer">Visualizar template 1 ↗</a>
+                                <a class="template-link" href="assets/templates/Empathy%20Map%20Template%20-%201.pdf" download="Empathy Map Template - 1.pdf">Baixar PDF 1</a>
+                            </div>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/Empathy%20Map%20Template%20-%202.pdf" target="_blank" rel="noopener noreferrer">Visualizar template 2 ↗</a>
+                                <a class="template-link" href="assets/templates/Empathy%20Map%20Template%20-%202.pdf" download="Empathy Map Template - 2.pdf">Baixar PDF 2</a>
+                            </div>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/Empathy%20Map%20Template%20-%203.png" target="_blank" rel="noopener noreferrer">Visualizar template 3 ↗</a>
+                                <a class="template-link" href="assets/templates/Empathy%20Map%20Template%20-%203.png" download="Empathy Map Template - 3.png">Baixar PNG 3</a>
+                            </div>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/Empathy%20Map%20Template%20-%204.png" target="_blank" rel="noopener noreferrer">Visualizar template 4 ↗</a>
+                                <a class="template-link" href="assets/templates/Empathy%20Map%20Template%20-%204.png" download="Empathy Map Template - 4.png">Baixar PNG 4</a>
+                            </div>
+                            <div class="template-actions">
+                                <a class="template-link" href="https://www.figma.com/community/file/1349321085655600278/empathy-map-templates" target="_blank" rel="noopener noreferrer">Abrir template editável no Figma ↗</a>
+                            </div>
+                        </div>
                     </details>
                     <details>
                         <summary>Roteiro de Entrevista</summary>
-                        <div class="tool-content">Documento estruturado com objetivos e perguntas diretas para guiar um diálogo imparcial.</div>
+                        <div class="tool-content">
+                            <p>Documento estruturado com objetivos e perguntas abertas para orientar uma pesquisa e guiar entrevistas sem induzir as respostas.</p>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="https://www.figma.com/community/file/992844865674063456/ux-research-plan-with-auto-layout" target="_blank" rel="noopener noreferrer">Abrir UX Research Plan editável no Figma ↗</a>
+                            </div>
+                        </div>
                     </details>
                     <details>
                         <summary>Auditoria Competitiva</summary>
-                        <div class="tool-content">Análise de concorrentes diretos e indiretos para identificar forças, fraquezas e lacunas de mercado.</div>
+                        <div class="tool-content">
+                            <p>Análise de concorrentes diretos e indiretos para identificar forças, fraquezas, padrões recorrentes e lacunas de mercado.</p>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/Pattern%20Identification%20Template.docx" download="Pattern Identification Template.docx">Baixar template de identificação de padrões (.docx)</a>
+                            </div>
+                        </div>
                     </details>
                     <details>
                         <summary>5 Ws e H</summary>
-                        <div class="tool-content">Investigação fundamental: Who, What, Where, When, Why e How para aprofundar problemas.</div>
+                        <div class="tool-content">
+                            <p>Estruture a investigação com Quem, O quê, Onde, Quando, Por quê e Como para compreender melhor o contexto do problema.</p>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/5W1H.pdf" target="_blank" rel="noopener noreferrer">Visualizar template 5W1H ↗</a>
+                                <a class="template-link" href="assets/templates/5W1H.pdf" download="5W1H.pdf">Baixar PDF</a>
+                                <a class="template-link template-link-primary" href="assets/templates/5W1H-2.png" target="_blank" rel="noopener noreferrer">Visualizar template 5W1H 2 ↗</a>
+                                <a class="template-link" href="assets/templates/5W1H-2.png" download="5W1H-2.png">Baixar PNG</a>
+                            </div>
+                            <div class="template-actions">
+                                <a class="template-link" href="https://www.figma.com/community/file/1219775357168746325/5w1h-for-design-projects?q_id=addc9654-4050-4287-a37a-fbffcda135ad" target="_blank" rel="noopener noreferrer">Abrir 5W1H for design projects editável no Figma ↗</a>
+                                <a class="template-link" href="https://www.figma.com/community/file/1450800901383922428/5w1h-template-the-conference-room?q_id=addc9654-4050-4287-a37a-fbffcda135ad" target="_blank" rel="noopener noreferrer">Abrir 5W1H Template editável no Figma ↗</a>
+                            </div>
+                        </div>
                     </details>
                 </div>
             </div>
@@ -859,19 +955,61 @@
                     <h3>Métodos e ferramentas</h3>
                     <details>
                         <summary>User Personas</summary>
-                        <div class="tool-content">Perfis fictícios baseados em dados reais que representam comportamentos e objetivos.</div>
+                        <div class="tool-content">
+                            <p>Perfis baseados em dados de pesquisa que representam objetivos, comportamentos e necessidades de grupos de pessoas usuárias.</p>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/User%20Persona%20Template.pdf" target="_blank" rel="noopener noreferrer">Visualizar template PDF ↗</a>
+                                <a class="template-link" href="assets/templates/User%20Persona%20Template.pdf" download="User Persona Template.pdf">Baixar PDF</a>
+                                <a class="template-link template-link-primary" href="assets/templates/User%20Persona%20Template.png" target="_blank" rel="noopener noreferrer">Visualizar imagem ↗</a>
+                                <a class="template-link" href="assets/templates/User%20Persona%20Template.png" download="User Persona Template.png">Baixar PNG</a>
+                                <a class="template-link" href="https://www.figma.com/community/file/1300140210593181007/user-personas-ux-uxis-academy?q_id=adf9d81a-3c99-4b96-ab9c-9bffebbe3591" target="_blank" rel="noopener noreferrer">Abrir template editável no Figma ↗</a>
+                            </div>
+                        </div>
                     </details>
                     <details>
                         <summary>User Journey Map</summary>
-                        <div class="tool-content">Visualização do caminho do usuário, destacando dores e oportunidades de melhoria.</div>
+                        <div class="tool-content">
+                            <p>Visualização do caminho do usuário, destacando etapas, pontos de contato, pensamentos, emoções, dores e oportunidades de melhoria.</p>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/User%20Journey%20Map%20Template.pdf" target="_blank" rel="noopener noreferrer">Visualizar PDF ↗</a>
+                                <a class="template-link" href="assets/templates/User%20Journey%20Map%20Template.pdf" download="User Journey Map Template.pdf">Baixar PDF</a>
+                                <a class="template-link" href="assets/templates/User%20Journey%20Map%20Template.pptx" download="User Journey Map Template.pptx">Baixar PowerPoint (.pptx)</a>
+                            </div>
+                        </div>
+                    </details>
+                    <details>
+                        <summary>Hypothesis Statement</summary>
+                        <div class="tool-content">
+                            <p>Declaração testável que conecta uma mudança proposta ao comportamento esperado e ao resultado para o usuário e para o negócio.</p>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/Hypothesis%20Statement%20Template.pdf" target="_blank" rel="noopener noreferrer">Visualizar PDF ↗</a>
+                                <a class="template-link" href="assets/templates/Hypothesis%20Statement%20Template.pdf" download="Hypothesis Statement Template.pdf">Baixar PDF</a>
+                                <a class="template-link" href="assets/templates/Hypothesis%20Statement%20Template.pptx" download="Hypothesis Statement Template.pptx">Baixar PowerPoint (.pptx)</a>
+                            </div>
+                        </div>
                     </details>
                     <details>
                         <summary>Problem Statement</summary>
-                        <div class="tool-content">Fórmula: [Nome] é um [Perfil] que precisa de [Necessidade] porque [Insight].</div>
+                        <div class="tool-content">
+                            <p>Fórmula: [Nome] é um [Perfil] que precisa de [Necessidade] porque [Insight].</p>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/Problem%20Statement%20Template.pdf" target="_blank" rel="noopener noreferrer">Visualizar PDF ↗</a>
+                                <a class="template-link" href="assets/templates/Problem%20Statement%20Template.pdf" download="Problem Statement Template.pdf">Baixar PDF</a>
+                                <a class="template-link" href="assets/templates/Problem%20Statement%20Template.pptx" download="Problem Statement Template.pptx">Baixar PowerPoint (.pptx)</a>
+                            </div>
+                        </div>
                     </details>
                     <details>
                         <summary>User Stories</summary>
-                        <div class="tool-content">Descrições curtas: Como [usuário], eu quero [ação] para [resultado].</div>
+                        <div class="tool-content">
+                            <p>Descrições curtas de necessidades: “Como [usuário], quero [ação] para [resultado]”.</p>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="https://www.figma.com/files/team/1566411706921095331/resources/community/file/855021256854915760?q_id=34fa5efe-d7b4-4a23-ae47-5f9a5aaad223&amp;fuid=1566411704970251110" target="_blank" rel="noopener noreferrer">Abrir User Stories Template editável no Figma ↗</a>
+                                <a class="template-link" href="https://www.figma.com/files/team/1566411706921095331/resources/community/file/1245131031656387651?q_id=34fa5efe-d7b4-4a23-ae47-5f9a5aaad223&amp;fuid=1566411704970251110" target="_blank" rel="noopener noreferrer">Abrir User Stories Canvas editável no Figma ↗</a>
+                                <a class="template-link template-link-primary" href="assets/templates/User%20Stories%20Canvas.png" target="_blank" rel="noopener noreferrer">Visualizar imagem ↗</a>
+                                <a class="template-link" href="assets/templates/User%20Stories%20Canvas.png" download="User Stories Canvas.png">Baixar PNG</a>
+                            </div>
+                        </div>
                     </details>
                 </div>
             </div>
@@ -898,19 +1036,50 @@
                     <h3>Métodos e ferramentas</h3>
                     <details>
                         <summary>How Might We (HMW)</summary>
-                        <div class="tool-content">Transforma problemas em perguntas: "Como nós poderíamos...", abrindo espaço para soluções.</div>
+                        <div class="tool-content">
+                            <p>Transforma problemas em perguntas “Como poderíamos...?”, abrindo espaço para soluções.</p>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/How%20Might%20We%20(HMW).png" target="_blank" rel="noopener noreferrer">Visualizar imagem ↗</a>
+                                <a class="template-link" href="assets/templates/How%20Might%20We%20(HMW).png" download="How Might We (HMW).png">Baixar PNG</a>
+                                <a class="template-link" href="https://www.figma.com/community/file/1305917804507924651/mindful-design-how-might-we-filled?q_id=a38a7ba4-19e7-459e-9e26-8dae9e06364d&amp;fuid=1566411704970251110" target="_blank" rel="noopener noreferrer">Abrir Mindful Design: How Might We editável no Figma ↗</a>
+                            </div>
+                        </div>
                     </details>
                     <details>
                         <summary>Crazy Eights</summary>
-                        <div class="tool-content">Esboço rápido de oito ideias em oito minutos, priorizando quantidade e instinto.</div>
+                        <div class="tool-content">
+                            <p>Esboço rápido de oito ideias em oito minutos, priorizando quantidade e exploração.</p>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/Crazy%20Eight%20Template.png" target="_blank" rel="noopener noreferrer">Visualizar imagem ↗</a>
+                                <a class="template-link" href="assets/templates/Crazy%20Eight%20Template.png" download="Crazy Eight Template.png">Baixar PNG</a>
+                                <a class="template-link" href="https://www.figma.com/community/file/1114265006153427236/crazy-eight-template?q_id=eb9b5d2f-6520-4afe-ab23-753d441b3222" target="_blank" rel="noopener noreferrer">Abrir Crazy Eight Template editável no Figma ↗</a>
+                            </div>
+                        </div>
                     </details>
                     <details>
                         <summary>SCAMPER</summary>
-                        <div class="tool-content">Substituir, Combinar, Adaptar, Modificar, Outro uso, Eliminar ou Reorganizar elementos.</div>
+                        <div class="tool-content">
+                            <p>Explore ideias ao Substituir, Combinar, Adaptar, Modificar, propor outros usos, Eliminar ou Reorganizar elementos.</p>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/SCAMPER.png" target="_blank" rel="noopener noreferrer">Visualizar imagem ↗</a>
+                                <a class="template-link" href="assets/templates/SCAMPER.png" download="SCAMPER.png">Baixar PNG</a>
+                                <a class="template-link" href="https://www.figma.com/community/file/1281657861213674100/scamper?q_id=698b5c8c-c0e9-44b7-a490-7864ad700767" target="_blank" rel="noopener noreferrer">Abrir SCAMPER Template editável no Figma ↗</a>
+                            </div>
+                        </div>
                     </details>
                     <details>
                         <summary>Storyboards</summary>
-                        <div class="tool-content"><strong>Big Picture:</strong> Foca na experiência macro e emoções. <strong>Close-up:</strong> Detalhes mecânicos da interface.</div>
+                        <div class="tool-content">
+                            <p><strong>Big Picture:</strong> foca na experiência macro e nas emoções. <strong>Close-up:</strong> detalha as interações com a interface.</p>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/Storyboard%20Template.pdf" target="_blank" rel="noopener noreferrer">Visualizar PDF ↗</a>
+                                <a class="template-link" href="assets/templates/Storyboard%20Template.pdf" download="Storyboard Template.pdf">Baixar PDF</a>
+                                <a class="template-link" href="assets/templates/Storyboard%20Template.pptx" download="Storyboard Template.pptx">Baixar PowerPoint (.pptx)</a>
+                                <a class="template-link template-link-primary" href="assets/templates/STORY%20BOARD.png" target="_blank" rel="noopener noreferrer">Visualizar imagem ↗</a>
+                                <a class="template-link" href="assets/templates/STORY%20BOARD.png" download="STORY BOARD.png">Baixar PNG</a>
+                                <a class="template-link" href="https://www.figma.com/community/file/1231612311802323618/story-board?q_id=e03ea84c-c46f-447c-8912-6c20a8970236&amp;fuid=1566411704970251110" target="_blank" rel="noopener noreferrer">Abrir STORY BOARD editável no Figma ↗</a>
+                            </div>
+                        </div>
                     </details>
                 </div>
             </div>
@@ -940,19 +1109,60 @@
                     <h3>Métodos e ferramentas</h3>
                     <details>
                         <summary>Sitemaps / IA</summary>
-                        <div class="tool-content">Planta visual que conecta as páginas de maneira lógica, mapeando a estrutura organizacional.</div>
+                        <div class="tool-content">
+                            <p>Planta visual que conecta as páginas de maneira lógica, mapeando a estrutura organizacional.</p>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/Website%20Sitemap%20Template.png" target="_blank" rel="noopener noreferrer">Visualizar imagem ↗</a>
+                                <a class="template-link" href="assets/templates/Website%20Sitemap%20Template.png" download="Website Sitemap Template.png">Baixar PNG</a>
+                                <a class="template-link" href="https://www.figma.com/community/file/1551971171138543180/website-sitemap-template?q_id=c8e0d669-cc30-4bdb-9f1e-81aece87a1c8" target="_blank" rel="noopener noreferrer">Abrir editável no Figma ↗</a>
+                            </div>
+                        </div>
                     </details>
                     <details>
                         <summary>Wireframes</summary>
-                        <div class="tool-content">Esboços estruturais de baixa fidelidade para definir layout e hierarquia sem focar no visual.</div>
+                        <div class="tool-content">
+                            <p>Esboços estruturais de baixa fidelidade para definir layout e hierarquia sem focar no visual. Escolha um dos templates para desktop:</p>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/Website%20Wireframes%20UI%20Kit.png" target="_blank" rel="noopener noreferrer">Visualizar imagem ↗</a>
+                                <a class="template-link" href="assets/templates/Website%20Wireframes%20UI%20Kit.png" download="Website Wireframes UI Kit.png">Baixar PNG</a>
+                                <a class="template-link" href="https://www.figma.com/community/file/1212997233512196965/website-wireframes-ui-kit" target="_blank" rel="noopener noreferrer">Abrir editável no Figma ↗</a>
+                            </div>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/wireframe-desktop-template.pdf" target="_blank" rel="noopener noreferrer">Visualizar desktop 1 ↗</a>
+                                <a class="template-link" href="assets/templates/wireframe-desktop-template.pdf" download="wireframe-desktop-template.pdf">Baixar desktop 1</a>
+                            </div>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/wireframe-desktop-template-2.pdf" target="_blank" rel="noopener noreferrer">Visualizar desktop 2 ↗</a>
+                                <a class="template-link" href="assets/templates/wireframe-desktop-template-2.pdf" download="wireframe-desktop-template-2.pdf">Baixar desktop 2</a>
+                            </div>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/wireframe-desktop-template-3.pdf" target="_blank" rel="noopener noreferrer">Visualizar desktop 3 ↗</a>
+                                <a class="template-link" href="assets/templates/wireframe-desktop-template-3.pdf" download="wireframe-desktop-template-3.pdf">Baixar desktop 3</a>
+                            </div>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/wireframe-desktop-template-4.pdf" target="_blank" rel="noopener noreferrer">Visualizar desktop 4 ↗</a>
+                                <a class="template-link" href="assets/templates/wireframe-desktop-template-4.pdf" download="wireframe-desktop-template-4.pdf">Baixar desktop 4</a>
+                            </div>
+                        </div>
                     </details>
                     <details>
                         <summary>Design Systems</summary>
-                        <div class="tool-content">Padrões reutilizáveis (Apple HIG / Material) que garantem consistência e eficiência.</div>
+                        <div class="tool-content">
+                            <p>Padrões reutilizáveis (Apple HIG / Material) que garantem consistência e eficiência.</p>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/Design%20System.png" target="_blank" rel="noopener noreferrer">Visualizar imagem ↗</a>
+                                <a class="template-link" href="assets/templates/Design%20System.png" download="Design System.png">Baixar PNG</a>
+                                <a class="template-link" href="https://www.figma.com/community/file/1267195373409722424/design-system?q_id=8db86403-59b1-47d3-908e-9f8eab7834e1" target="_blank" rel="noopener noreferrer">Abrir editável no Figma ↗</a>
+                            </div>
+                        </div>
                     </details>
                     <details>
                         <summary>Figma (Auto Layout/Variants)</summary>
-                        <div class="tool-content">Recursos para criar designs responsivos e agrupar diferentes estados de componentes.</div>
+                        <div class="tool-content">
+                            <p>Recursos para criar designs responsivos e agrupar diferentes estados de componentes.</p>
+                            <div class="template-actions"><a class="template-link template-link-primary" href="https://www.figma.com/community/file/784448220678228461/figma-auto-layout-playground?q_id=9450a917-552e-4a37-a6f1-1d7fe0672f20&amp;fuid=1566411704970251110" target="_blank" rel="noopener noreferrer">Abrir Figma Auto Layout Playground ↗</a></div>
+                            <div class="template-actions"><a class="template-link" href="https://www.figma.com/community/file/809752704119681183/creating-tables-in-figma-with-auto-layout?q_id=9450a917-552e-4a37-a6f1-1d7fe0672f20&amp;fuid=1566411704970251110" target="_blank" rel="noopener noreferrer">Abrir Creating Tables in Figma with Auto Layout ↗</a></div>
+                        </div>
                     </details>
                 </div>
             </div>
@@ -982,32 +1192,136 @@
                     <h3>Métodos e ferramentas</h3>
                     <details>
                         <summary>Estudo de Usabilidade</summary>
-                        <div class="tool-content">Usuários interagem com o protótipo enquanto pesquisadores observam barreiras e facilidades.</div>
+                        <div class="tool-content">
+                            <p>Pessoas usuárias interagem com o protótipo enquanto a equipe observa barreiras e facilidades. Use a planilha para apoiar o planejamento e registro do estudo.</p>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/template%20usability%20study.xlsx" download="template usability study.xlsx">Baixar template de estudo (.xlsx)</a>
+                            </div>
+                            <div class="template-actions"><a class="template-link template-link-primary" href="https://www.figma.com/community/file/1464261175708090230/usability-test-planning-and-analysis-template?q_id=a1e359a3-14e0-438f-b830-c4a0420ae03a" target="_blank" rel="noopener noreferrer">Abrir Usability Test Planning and Analysis Template ↗</a></div>
+                            <div class="template-actions"><a class="template-link" href="https://www.figma.com/community/file/1356687634364854815/conduct-an-unmoderated-usability-test-template?q_id=256009cd-5b33-4907-931b-ff8356d96e99" target="_blank" rel="noopener noreferrer">Abrir Conduct An Unmoderated Usability Test ↗</a></div>
+                        </div>
                     </details>
                     <details>
                         <summary>Diagrama de Afinidade</summary>
-                        <div class="tool-content">Organização de feedbacks em clusters temáticos para identificar problemas recorrentes.</div>
+                        <div class="tool-content">
+                            <p>Organização de feedbacks em clusters temáticos para identificar problemas recorrentes.</p>
+                            <div class="template-actions"><a class="template-link template-link-primary" href="https://www.figma.com/community/file/1028020937301708374/affinity-diagram?q_id=f75f57f9-60ce-47f5-9978-f2b6374b484a" target="_blank" rel="noopener noreferrer">Abrir Affinity diagram editável no Figma ↗</a></div>
+                        </div>
                     </details>
                     <details>
                         <summary>System Usability Scale (SUS)</summary>
-                        <div class="tool-content">Questionário de 10 perguntas para medir quantitativamente a facilidade de uso do sistema.</div>
+                        <div class="tool-content">
+                            <p>Questionário de 10 perguntas para medir quantitativamente a facilidade de uso do sistema.</p>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/System%20Usability%20Scale%20Toolkit.png" target="_blank" rel="noopener noreferrer">Visualizar imagem ↗</a>
+                                <a class="template-link" href="assets/templates/System%20Usability%20Scale%20Toolkit.png" download="System Usability Scale Toolkit.png">Baixar PNG</a>
+                                <a class="template-link" href="https://www.figma.com/community/file/1415622277272761656/system-usability-scale-toolkit?q_id=0dbce5f3-c82e-460f-acb6-ffa09ee3e674&amp;fuid=1566411704970251110" target="_blank" rel="noopener noreferrer">Abrir editável no Figma ↗</a>
+                            </div>
+                        </div>
                     </details>
                     <details>
                         <summary>Think-Aloud Method</summary>
                         <div class="tool-content">O participante verbaliza pensamentos e decisões enquanto navega, expondo modelos mentais.</div>
+                    </details>
+                    <details>
+                        <summary>Apresentação de Case Study</summary>
+                        <div class="tool-content">
+                            <p>Modelo de apresentação para organizar e comunicar o contexto, o processo, as decisões e os resultados de um projeto.</p>
+                            <div class="template-actions">
+                                <a class="template-link template-link-primary" href="assets/templates/Case%20study%20slide%20deck%20template.pdf" target="_blank" rel="noopener noreferrer">Visualizar PDF ↗</a>
+                                <a class="template-link" href="assets/templates/Case%20study%20slide%20deck%20template.pdf" download="Case study slide deck template.pdf">Baixar PDF</a>
+                                <a class="template-link" href="assets/templates/Case%20study%20slide%20deck%20template.pptx" download="Case study slide deck template.pptx">Baixar PowerPoint (.pptx)</a>
+                                <a class="template-link" href="https://www.figma.com/community/file/1691239157885208511/case-study-documentation-template-for-ux-designers?q_id=c733f9a9-e009-4ecc-b949-6a357c5a4155&amp;fuid=1566411704970251110" target="_blank" rel="noopener noreferrer">Abrir Case Study Documentation Template editável no Figma ↗</a>
+                            </div>
+                        </div>
                     </details>
                 </div>
             </div>
         </section>
         </div>
 
+        <section class="transversal-resources" aria-label="Kit geral de templates de pesquisa e UX">
+            <details>
+                <summary>Kit geral de templates de pesquisa e UX</summary>
+                <div class="tool-content">
+                    <p>Coleção com modelos para pesquisa e atividades de UX, incluindo Matriz CSD, mapa de jornada, roteiro de entrevista, Kickoff Canvas, proposta de valor e mapa de stakeholders.</p>
+                    <div class="template-actions">
+                        <a class="template-link template-link-primary" href="https://www.figma.com/community/file/1502403114755767362/kit-de-templates-pesquisa-e-ux" target="_blank" rel="noopener noreferrer">Abrir kit editável no Figma ↗</a>
+                    </div>
+                </div>
+            </details>
+            <details>
+                <summary>Brainstorming Templates</summary>
+                <div class="tool-content">
+                    <p>Coleção de estruturas para facilitar sessões de brainstorming e organizar ideias.</p>
+                    <div class="template-actions">
+                        <a class="template-link template-link-primary" href="https://www.figma.com/community/file/1143933002014375180/brainstorming-templates?q_id=698b5c8c-c0e9-44b7-a490-7864ad700767" target="_blank" rel="noopener noreferrer">Abrir Brainstorming Templates editável no Figma ↗</a>
+                    </div>
+                </div>
+            </details>
+            <details>
+                <summary>UX: Design Thinking Process</summary>
+                <div class="tool-content">
+                    <p>Recurso visual para apoiar a compreensão e a condução do processo de Design Thinking em UX.</p>
+                    <div class="template-actions">
+                        <a class="template-link template-link-primary" href="https://www.figma.com/community/file/1300222634723559846/ux-design-thinking-process?q_id=698b5c8c-c0e9-44b7-a490-7864ad700767" target="_blank" rel="noopener noreferrer">Abrir UX: Design Thinking Process no Figma ↗</a>
+                    </div>
+                </div>
+            </details>
+        </section>
+
+        <section id="leis-ux" class="ux-laws-section" aria-labelledby="ux-laws-title">
+            <div class="section-heading">
+                <span class="section-heading-label">Princípios para decisões de design</span>
+                <h2 id="ux-laws-title">LEIS DE UX</h2>
+                <p class="ux-laws-intro">Heurísticas de psicologia e percepção que ajudam a orientar decisões de interface. Use-as como hipóteses para investigar e validar com pessoas usuárias, não como regras universais. Definições adaptadas de <a href="https://lawsofux.com/" target="_blank" rel="noopener noreferrer">Laws of UX</a>; as aplicações abaixo são exemplos práticos para projetos digitais.</p>
+            </div>
+            <div class="ux-laws-grid">
+                <article class="ux-law-card"><h3>Efeito estética-usabilidade</h3><p><strong>Definição:</strong> pessoas tendem a perceber interfaces visualmente agradáveis como mais fáceis de usar.</p><p><strong>Na prática:</strong> crie uma hierarquia visual coerente, mas teste tarefas reais para que a aparência não esconda problemas de uso.</p></article>
+                <article class="ux-law-card"><h3>Sobrecarga de escolha</h3><p><strong>Definição:</strong> muitas opções podem dificultar a decisão e reduzir a satisfação com a escolha.</p><p><strong>Na prática:</strong> organize catálogos por categorias, ofereça filtros úteis e destaque opções relevantes sem ocultar alternativas importantes.</p></article>
+                <article class="ux-law-card"><h3>Segmentação (Chunking)</h3><p><strong>Definição:</strong> agrupar informações em unidades significativas facilita a leitura e o processamento.</p><p><strong>Na prática:</strong> divida formulários longos em etapas e agrupe campos relacionados com títulos claros.</p></article>
+                <article class="ux-law-card"><h3>Viés cognitivo</h3><p><strong>Definição:</strong> padrões sistemáticos de julgamento influenciam como interpretamos informações e tomamos decisões.</p><p><strong>Na prática:</strong> examine pesquisas e métricas por possíveis vieses de seleção ou confirmação e apresente opções com equilíbrio.</p></article>
+                <article class="ux-law-card"><h3>Carga cognitiva</h3><p><strong>Definição:</strong> é o esforço mental necessário para entender uma interface e realizar uma tarefa.</p><p><strong>Na prática:</strong> simplifique instruções, use rótulos claros, remova distrações e mostre informações no momento em que são necessárias.</p></article>
+                <article class="ux-law-card"><h3>Limite de Doherty</h3><p><strong>Definição:</strong> a interação parece mais fluida quando sistema e pessoa respondem sem esperas perceptíveis; a referência clássica é cerca de 400 ms.</p><p><strong>Na prática:</strong> otimize respostas frequentes e, quando houver espera, mostre progresso e mantenha o usuário informado.</p></article>
+                <article class="ux-law-card"><h3>Lei de Fitts</h3><p><strong>Definição:</strong> o tempo para alcançar um alvo depende da distância até ele e do tamanho do alvo.</p><p><strong>Na prática:</strong> dimensione e posicione botões de ação frequente para que sejam fáceis de encontrar e tocar, especialmente no celular.</p></article>
+                <article class="ux-law-card"><h3>Estado de fluxo</h3><p><strong>Definição:</strong> concentração e envolvimento aumentam quando desafio, habilidade e retorno da atividade estão bem equilibrados.</p><p><strong>Na prática:</strong> mantenha o próximo passo claro, reduza interrupções e ofereça feedback que ajude a pessoa a continuar.</p></article>
+                <article class="ux-law-card"><h3>Efeito de gradiente de meta</h3><p><strong>Definição:</strong> a motivação para concluir tende a crescer conforme a pessoa percebe que está mais perto do objetivo.</p><p><strong>Na prática:</strong> mostre etapas concluídas e progresso real em cadastros ou processos, sem inflar artificialmente a proximidade da conclusão.</p></article>
+                <article class="ux-law-card"><h3>Lei de Hick</h3><p><strong>Definição:</strong> o tempo para decidir tende a crescer com a quantidade e a complexidade das opções.</p><p><strong>Na prática:</strong> agrupe escolhas, simplifique decisões iniciais e revele opções avançadas quando forem relevantes.</p></article>
+                <article class="ux-law-card"><h3>Lei de Jakob</h3><p><strong>Definição:</strong> pessoas esperam que uma interface funcione de modo semelhante a outras que já conhecem.</p><p><strong>Na prática:</strong> use padrões familiares para navegação, busca e formulários; inove quando isso trouxer benefício compreensível.</p></article>
+                <article class="ux-law-card"><h3>Região comum</h3><p><strong>Definição:</strong> elementos dentro de uma mesma área delimitada tendem a ser percebidos como relacionados.</p><p><strong>Na prática:</strong> use cartões, painéis ou fundos para agrupar controles e conteúdos que pertencem à mesma tarefa.</p></article>
+                <article class="ux-law-card"><h3>Proximidade</h3><p><strong>Definição:</strong> elementos próximos entre si tendem a ser percebidos como um grupo.</p><p><strong>Na prática:</strong> aproxime rótulos dos respectivos campos e mantenha espaço maior entre grupos diferentes.</p></article>
+                <article class="ux-law-card"><h3>Prägnanz (boa forma)</h3><p><strong>Definição:</strong> diante de formas ambíguas ou complexas, tendemos a percebê-las na organização mais simples possível.</p><p><strong>Na prática:</strong> prefira layouts limpos, alinhamentos consistentes e formas reconhecíveis para tornar a estrutura fácil de interpretar.</p></article>
+                <article class="ux-law-card"><h3>Similaridade</h3><p><strong>Definição:</strong> elementos com aparência semelhante tendem a ser percebidos como pertencentes ao mesmo grupo ou função.</p><p><strong>Na prática:</strong> mantenha padrões visuais consistentes para ações equivalentes e diferencie controles que têm comportamentos distintos.</p></article>
+                <article class="ux-law-card"><h3>Conexão uniforme</h3><p><strong>Definição:</strong> elementos ligados visualmente são percebidos como mais relacionados do que elementos sem conexão.</p><p><strong>Na prática:</strong> use linhas, indicadores ou etapas conectadas para explicar relações e sequências, sempre com apoio de rótulos.</p></article>
+                <article class="ux-law-card"><h3>Modelo mental</h3><p><strong>Definição:</strong> é a compreensão que uma pessoa constrói sobre como um sistema funciona.</p><p><strong>Na prática:</strong> use termos e comportamentos previsíveis e valide se a organização da interface corresponde às expectativas do público.</p></article>
+                <article class="ux-law-card"><h3>Lei de Miller</h3><p><strong>Definição:</strong> a memória de trabalho tem capacidade limitada, que varia conforme contexto e familiaridade. O número sete não é um limite rígido para menus.</p><p><strong>Na prática:</strong> agrupe informações, permita consultar dados já fornecidos e evite exigir que a pessoa memorize conteúdo entre telas.</p></article>
+                <article class="ux-law-card"><h3>Navalha de Occam</h3><p><strong>Definição:</strong> entre explicações que atendem igualmente às evidências, prefira a que depende de menos suposições.</p><p><strong>Na prática:</strong> comece pela solução mais simples que resolve a necessidade e acrescente complexidade quando pesquisa ou uso justificar.</p></article>
+                <article class="ux-law-card"><h3>Paradoxo do usuário ativo</h3><p><strong>Definição:</strong> muitas pessoas começam a usar um produto imediatamente, sem ler instruções ou documentação.</p><p><strong>Na prática:</strong> torne a interface compreensível durante o uso e ofereça ajuda contextual nos pontos em que surgem dúvidas.</p></article>
+                <article class="ux-law-card"><h3>Princípio de Pareto</h3><p><strong>Definição:</strong> em alguns contextos, uma parcela menor das causas pode responder por grande parte dos efeitos; a proporção 80/20 é uma aproximação, não uma lei fixa.</p><p><strong>Na prática:</strong> analise dados para identificar tarefas e problemas mais frequentes e priorize melhorias com impacto demonstrável.</p></article>
+                <article class="ux-law-card"><h3>Lei de Parkinson</h3><p><strong>Definição:</strong> o trabalho tende a ocupar o tempo disponível para concluí-lo.</p><p><strong>Na prática:</strong> defina escopo e prazos realistas para tarefas e processos, sem usar urgência artificial para pressionar usuários.</p></article>
+                <article class="ux-law-card"><h3>Regra do pico-fim</h3><p><strong>Definição:</strong> a avaliação de uma experiência é influenciada especialmente pelos momentos mais marcantes e pelo seu final.</p><p><strong>Na prática:</strong> cuide de momentos críticos, como resolver um erro ou confirmar uma compra, e finalize tarefas com um retorno claro.</p></article>
+                <article class="ux-law-card"><h3>Lei de Postel</h3><p><strong>Definição:</strong> a formulação clássica recomenda flexibilidade ao aceitar entradas e consistência ao produzir saídas.</p><p><strong>Na prática:</strong> aceite formatos comuns de entrada quando possível, valide com mensagens úteis e apresente dados em formato consistente.</p></article>
+                <article class="ux-law-card"><h3>Atenção seletiva</h3><p><strong>Definição:</strong> as pessoas focam em parte dos estímulos disponíveis, especialmente nos que parecem ligados ao seu objetivo.</p><p><strong>Na prática:</strong> destaque a ação principal e informações essenciais; não dependa apenas de avisos periféricos para comunicar algo importante.</p></article>
+                <article class="ux-law-card"><h3>Efeito de posição serial</h3><p><strong>Definição:</strong> itens no início e no fim de uma sequência tendem a ser mais lembrados do que os do meio.</p><p><strong>Na prática:</strong> coloque ações e informações prioritárias em posições de destaque e facilite localizar os demais itens.</p></article>
+                <article class="ux-law-card"><h3>Lei de Tesler</h3><p><strong>Definição:</strong> toda aplicação tem uma complexidade inerente que não pode ser removida por completo, apenas distribuída.</p><p><strong>Na prática:</strong> deixe o sistema cuidar de cálculos e tarefas repetitivas, oferecendo controles para revisar decisões importantes.</p></article>
+                <article class="ux-law-card"><h3>Efeito Von Restorff</h3><p><strong>Definição:</strong> entre elementos semelhantes, aquele que se destaca tende a ser lembrado com mais facilidade.</p><p><strong>Na prática:</strong> reserve contraste para chamadas realmente prioritárias e preserve hierarquia para que o destaque continue significativo.</p></article>
+                <article class="ux-law-card"><h3>Memória de trabalho</h3><p><strong>Definição:</strong> é o sistema mental que mantém e manipula temporariamente as informações necessárias para uma tarefa.</p><p><strong>Na prática:</strong> mantenha dados relevantes visíveis, use padrões reconhecíveis e permita retomar etapas sem recomeçar do zero.</p></article>
+                <article class="ux-law-card"><h3>Efeito Zeigarnik</h3><p><strong>Definição:</strong> tarefas incompletas ou interrompidas tendem a permanecer na memória com mais facilidade do que tarefas concluídas.</p><p><strong>Na prática:</strong> salve o progresso e indique claramente o que falta; não use pendências artificiais para gerar ansiedade ou engajamento forçado.</p></article>
+            </div>
+            <p class="ux-laws-intro" style="margin-top: 20px;">Referência: <a href="https://lawsofux.com/" target="_blank" rel="noopener noreferrer">Laws of UX — coleção de leis e princípios de experiência do usuário</a>.</p>
+        </section>
+
         <!-- Seção Final: Ética -->
-        <section>
-            <h2>Pilar Transversal: Ética e Responsabilidade</h2>
-            <p>Decisões que devem acompanhar todos os dias da Sprint:</p>
-            <div class="grid" style="grid-template-columns: repeat(3, 1fr);">
+        <section id="etica-acessibilidade" aria-labelledby="ethics-title">
+            <div class="section-heading">
+                <span class="section-heading-label">Princípios transversais</span>
+                <h2 id="ethics-title">ÉTICA E ACESSIBILIDADE</h2>
+                <p>Critérios para orientar decisões responsáveis e inclusivas em todas as etapas da sprint:</p>
+            </div>
+            <div class="grid" style="grid-template-columns: repeat(4, 1fr);">
                 <div class="decision-item"><strong>Antivieses:</strong> Combater viés de confirmação e simpatia.</div>
-                <div class="decision-item"><strong>Inclusão:</strong> Design para o bem social e populações sub-representadas.</div>
+                <div class="decision-item"><strong>Inclusão:</strong> Considerar diferentes contextos, capacidades e populações sub-representadas.</div>
+                <div class="decision-item"><strong>Acessibilidade:</strong> Garantir contraste, navegação por teclado, textos alternativos e conteúdo compreensível.</div>
                 <div class="decision-item"><strong>Anti-Deceptive Patterns:</strong> Banir custos ocultos e confirmshaming.</div>
             </div>
             <div style="margin-top: 2rem;">
@@ -1032,6 +1346,21 @@
     </footer>
 
     <script>
+        const themeToggle = document.querySelector('.theme-toggle');
+        function updateThemeToggle(isDark) {
+            themeToggle.setAttribute('aria-pressed', String(isDark));
+            themeToggle.setAttribute('aria-label', isDark ? 'Ativar modo claro' : 'Ativar modo escuro');
+            themeToggle.title = isDark ? 'Ativar modo claro' : 'Ativar modo escuro';
+            themeToggle.querySelector('.theme-toggle-icon').textContent = isDark ? '☀' : '☾';
+            themeToggle.querySelector('.theme-toggle-label').textContent = isDark ? 'Modo claro' : 'Modo escuro';
+        }
+        updateThemeToggle(document.body.classList.contains('dark-theme'));
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.body.classList.toggle('dark-theme');
+            try { localStorage.setItem('my-creative-box-theme', isDark ? 'dark' : 'light'); } catch (_) {}
+            updateThemeToggle(isDark);
+        });
+
         const dayTabs = Array.from(document.querySelectorAll('[role="tab"]'));
         const dayPanels = dayTabs.map(tab => document.getElementById(tab.getAttribute('aria-controls')));
 

@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <script>
+        try { if (localStorage.getItem('my-creative-box-theme') === 'dark') document.body.classList.add('dark-theme'); } catch (_) {}
+    </script>
 
     <div id="app-container">
         <main id="content">

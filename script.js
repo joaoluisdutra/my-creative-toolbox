@@ -454,7 +454,7 @@ function getCategorySymbol(category) {
 }
 
 function getCategoryCount(category) {
-    if (category === 'moodboard') return 59;
+    if (category === 'moodboard') return moodboardImageFiles.length;
     return (groupedTools[category] || []).length;
 }
 
@@ -710,23 +710,31 @@ function renderToolbox(filterText = '') {
             const grid = document.createElement('div');
             grid.className = 'moodboard-grid';
 
-            // Renderiza dinamicamente as 59 imagens com base na extensão correta
-            for (let i = 1; i <= 59; i++) {
-                const extension = i <= 37 ? 'jpg' : 'png';
+            // Embaralha a ordem a cada renderização e usa a extensão de cada lote.
+            const moodboardImages = [...moodboardImageFiles];
+            for (let i = moodboardImages.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [moodboardImages[i], moodboardImages[j]] = [moodboardImages[j], moodboardImages[i]];
+            }
+
+            moodboardImages.forEach((filename) => {
+                const imageNumber = Number(filename.match(/\d+/)[0]);
                 const item = document.createElement('div');
                 item.className = 'moodboard-item';
                 
                 const img = document.createElement('img');
-                img.src = `assets/moodboard/moodboard-${i}.${extension}`;
-                img.alt = `Moodboard Item ${i}`;
+                img.src = `assets/moodboard/${filename}`;
+                img.alt = `Moodboard Item ${imageNumber}`;
                 img.loading = "lazy"; // Melhora a performance de carregamento
                 img.decoding = 'async';
-                img.width = moodboardSizes[i - 1][0];
-                img.height = moodboardSizes[i - 1][1];
+                if (moodboardSizes[imageNumber - 1]) {
+                    img.width = moodboardSizes[imageNumber - 1][0];
+                    img.height = moodboardSizes[imageNumber - 1][1];
+                }
                 
                 item.appendChild(img);
                 grid.appendChild(item);
-            }
+            });
 
             const wrapper = document.createElement('div');
             wrapper.className = 'category-content';
@@ -814,6 +822,17 @@ function initSearch() {
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
     `;
+
+    const themeToggle = document.createElement('button');
+    themeToggle.className = 'theme-toggle';
+    themeToggle.type = 'button';
+    themeToggle.addEventListener('click', () => {
+        const isDark = document.body.classList.toggle('dark-theme');
+        try { localStorage.setItem('my-creative-box-theme', isDark ? 'dark' : 'light'); } catch (_) {}
+        updateThemeToggle(themeToggle, isDark);
+    });
+    updateThemeToggle(themeToggle, document.body.classList.contains('dark-theme'));
+    container.appendChild(themeToggle);
     
     document.body.appendChild(container);
 
@@ -840,6 +859,11 @@ function renderNavbar() {
 
     const navLinks = document.createElement('div');
     navLinks.className = 'nav-links';
+
+    const uxPatchLink = document.createElement('a');
+    uxPatchLink.className = 'nav-link nav-ux-patch';
+    uxPatchLink.href = 'uxpatch.html';
+    uxPatchLink.innerHTML = '<span class="nav-link-icon">UX</span><span class="nav-link-label">UX Patch</span>';
 
     const libraryTitle = document.createElement('div');
     libraryTitle.className = 'nav-section-title';
@@ -872,7 +896,6 @@ function renderNavbar() {
     navLinks.appendChild(personalTitle);
 
     const personalLinks = [
-        { name: 'UX Patch', url: 'uxpatch.html' },
         { name: 'Portfolio', url: 'https://joaoluisdutra.github.io/portfolio/' },
         { name: 'LinkedIn', url: 'https://www.linkedin.com/in/joaoluisdutra/' },
         { name: 'Behance', url: 'https://www.behance.net/userdojoao' },
@@ -890,13 +913,28 @@ function renderNavbar() {
     });
 
     navContent.appendChild(brand);
+    navContent.appendChild(uxPatchLink);
     navContent.appendChild(navLinks);
     nav.appendChild(navContent);
     document.body.prepend(nav);
 }
 
+function updateThemeToggle(button, isDark) {
+    button.setAttribute('aria-pressed', String(isDark));
+    button.setAttribute('aria-label', isDark ? 'Ativar modo claro' : 'Ativar modo escuro');
+    button.title = isDark ? 'Ativar modo claro' : 'Ativar modo escuro';
+    button.innerHTML = `<span class="theme-toggle-icon" aria-hidden="true">${isDark ? '☀' : '☾'}</span><span class="theme-toggle-label">${isDark ? 'Modo claro' : 'Modo escuro'}</span>`;
+}
+
 // Intrinsic dimensions reserve space for lazy images in the masonry layout.
 const moodboardSizes = [[1081,1081],[1350,1688],[1080,1350],[1440,1801],[1440,1440],[1253,1565],[1440,1763],[1080,1440],[1440,1800],[1080,1380],[1440,1914],[1440,1914],[896,1152],[1440,1800],[1440,1920],[1080,1350],[1440,1440],[1080,1326],[1440,1800],[1440,1789],[1179,1445],[1080,1350],[1440,1800],[1440,1440],[1440,1800],[1440,1800],[1440,1800],[1440,1800],[1080,1080],[1440,1800],[1440,1440],[3213,3213],[1080,1080],[1440,1800],[1440,1440],[1440,1567],[1440,1798],[415,538],[306,541],[299,493],[429,544],[403,544],[3840,2180],[306,440],[304,501],[436,545],[305,336],[434,545],[448,544],[303,335],[442,443],[299,501],[303,495],[302,543],[436,544],[432,545],[303,532],[303,546],[1440,1798]];
+const moodboardImageFiles = [
+    ...[
+        ['jpg', '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,107,109,110,113,114,115'],
+        ['png', '38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,65,66,67,68,69,71,72,74,75,76,78,79,80,81,82,84,86,87,88,89,91,93,94,96,97,100,101,102,103,105,108,111,112'],
+        ['jpeg', '61,62,63,64,70,73,77,83,85,90,92,95,98,99,104,106']
+    ].flatMap(([extension, numbers]) => numbers.split(',').map(number => `moodboard-${number}.${extension}`))
+];
 
 loadGoogleFonts();
 renderNavbar();
