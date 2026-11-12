@@ -1148,11 +1148,11 @@ body { padding: 126px 36px 48px 284px; }
 .nav-link { min-height: 43px; border-radius: 9px; color: #666d62; font-size: 12px; font-weight: 600; }
 .nav-link small { background: #ecefe5; color: #777e6b; border-radius: 5px; padding: 2px 5px; }
 .nav-link:hover, .nav-category-link:hover { background: #eef1e7; }
-.nav-all-tools { min-height: 56px; background: var(--accent); color: #29301c; }
-.nav-all-tools:hover { background: var(--accent); }
 .nav-ux-patch { min-height: 43px; background: var(--accent); color: #29301c; }
 .nav-ux-patch:hover { background: var(--accent); color: #29301c; }
-.nav-all-tools small { background: #2d361b; color: #e0f8a2; }
+.nav-articles-featured { min-height: 43px; margin-top: -14px; background: #e8efd1; color: #30391b; }
+.nav-articles-featured:hover { background: #dce8b7; color: #30391b; }
+.nav-articles-featured small { background: #f5f7ec; color: #53652a; }
 .search-container {
     position: fixed; top: 0; left: 248px; right: 0; z-index: 1500;
     height: 93px; margin: 0; padding: 23px 36px 23px 22px;
@@ -1214,12 +1214,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 .theme-toggle-icon { font-size: 16px; line-height: 1; }
 body.dark-theme .theme-toggle { background: var(--bg-card); }
 body.dark-theme .nav-link { color: var(--text-muted); }
-body.dark-theme .nav-all-tools,
 body.dark-theme .nav-ux-patch,
-body.dark-theme .nav-all-tools:hover,
-body.dark-theme .nav-ux-patch:hover { color: #29301c; }
-body.dark-theme .nav-all-tools:hover,
+body.dark-theme .nav-articles-featured,
+body.dark-theme .nav-ux-patch:hover,
+body.dark-theme .nav-articles-featured:hover { color: #29301c; }
 body.dark-theme .nav-ux-patch:hover { background: var(--accent); color: #212427; }
+body.dark-theme .nav-articles-featured { background: #39432a; color: #e8efd1; }
+body.dark-theme .nav-articles-featured:hover { background: #465334; color: #e8efd1; }
+body.dark-theme .nav-articles-featured small { background: #28301f; color: #d7e5a8; }
 body.dark-theme .nav-section-title { color: var(--text-muted); }
 body.dark-theme .nav-link small,
 body.dark-theme .catalog-intro small { background: #30342b; color: #d2d7c7; }

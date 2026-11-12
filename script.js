@@ -2,6 +2,39 @@
     // Learning Tools
     { nome: "Shoogle", categoria: "web development", link: "https://shoogle.dev/", desc: "Plataforma de aprendizado focada em desenvolvimento web e ferramentas de programação para desenvolvedores modernos." },
     { nome: "Laws of UX", categoria: "articles", link: "https://lawsofux.com/", desc: "Coleção das leis da psicologia que os designers devem considerar ao construir interfaces de usuário." },
+    { nome: "Smashing Magazine", categoria: "articles", link: "https://www.smashingmagazine.com/", desc: "Publicação sobre design, UX, desenvolvimento web e boas práticas para produtos digitais." },
+    { nome: "UX Design", categoria: "articles", link: "https://uxdesign.cc/", desc: "Publicação com artigos e perspectivas sobre experiência do usuário e design de produtos." },
+    { nome: "Better Buttons — Smashing Magazine", categoria: "articles", link: "https://www.smashingmagazine.com/2016/11/a-quick-guide-for-designing-better-buttons/", desc: "Guia de princípios para projetar botões mais claros e eficazes." },
+    { nome: "Mobile UI Button Design — UX Planet", categoria: "articles", link: "https://uxplanet.org/7-rules-for-mobile-ui-button-design-e9cf2ea54556", desc: "Regras e recomendações para o design de botões em interfaces móveis." },
+    { nome: "Agile and Waterfall Methodologies — Figma", categoria: "UX tools", link: "https://www.figma.com/resource-library/agile-and-waterfall-methodologies/", desc: "Guia comparativo das metodologias Agile e Waterfall para organizar projetos." },
+    { nome: "Information Architecture — UX Design", categoria: "articles", link: "https://uxdesign.cc/a-plea-for-the-lost-practice-of-information-architecture-19a5ae5ca65e", desc: "Reflexão sobre a importância da arquitetura da informação na prática de design." },
+    { nome: "Is This My Interface or Yours?", categoria: "articles", link: "https://medium.com/@jsaito/is-this-my-interface-or-yours-b09a7a795256", desc: "Artigo sobre autoria, consistência e padrões em interfaces digitais." },
+    { nome: "Whimsical", categoria: "UX tools", link: "https://whimsical.com/", desc: "Ferramenta visual para criar fluxogramas, wireframes, mapas mentais e diagramas." },
+    { nome: "Responsive Web Design — Ethan Marcotte", categoria: "articles", link: "https://ethanmarcotte.com/books/responsive-web-design/full/chap01/", desc: "Capítulo introdutório sobre os fundamentos do design responsivo." },
+    { nome: "Responsive Web Design — A List Apart", categoria: "articles", link: "https://alistapart.com/article/responsive-web-design/", desc: "Artigo fundamental sobre layouts e experiências adaptáveis a diferentes telas." },
+    { nome: "UI Patterns", categoria: "ui tools", link: "https://ui-patterns.com/patterns", desc: "Biblioteca de padrões de interface e soluções recorrentes de UI." },
+    { nome: "The Rhythm of Your Screen", categoria: "articles", link: "https://www.chrbutler.com/the-rhythm-of-your-screen", desc: "Artigo sobre ritmo visual e composição em telas." },
+    { nome: "Ignore the Details Early On — 37signals", categoria: "articles", link: "https://37signals.com/podcast/ignore-the-details-early-on/", desc: "Episódio de podcast sobre priorizar estrutura e decisões principais no início do projeto." },
+    { nome: "Building Better UI Designs with Layout Grids", categoria: "articles", link: "https://www.smashingmagazine.com/2017/12/building-better-ui-designs-layout-grids/", desc: "Artigo sobre o uso de grids para estruturar interfaces melhores." },
+    { nome: "Body Text Small", categoria: "articles", link: "https://marvelapp.com/blog/body-text-small/", desc: "Leitura sobre tamanho de texto e legibilidade em interfaces." },
+    { nome: "Negative Space & Typography", categoria: "articles", link: "https://www.chrbutler.com/negative-space-typography", desc: "Artigo sobre a relação entre espaço negativo e tipografia." },
+    { nome: "Web Design Museum", categoria: "archives", link: "https://www.webdesignmuseum.org/", desc: "Acervo histórico de sites e da evolução do web design." },
+    { nome: "Remember the Space Jam Site? — AIGA Eye on Design", categoria: "articles", link: "https://eyeondesign.aiga.org/remember-the-space-jam-site-a-trip-through-online-past-with-the-web-design-museum/", desc: "Artigo sobre memória da web e referências preservadas pelo Web Design Museum." },
+    { nome: "Skeuomorphism, Flat Design, Material Design", categoria: "articles", link: "https://99designs.com/blog/trends/skeuomorphism-flat-design-material-design/", desc: "Panorama de tendências e estilos visuais de design de interface." },
+    { nome: "Design Mood: 7 Motives to Create Mood Boards", categoria: "articles", link: "https://uxplanet.org/design-mood-7-motives-to-create-mood-boards-b81ae36e399f", desc: "Artigo sobre objetivos e usos de moodboards no processo de design." },
+    { nome: "A Brief History of Web Design", categoria: "articles", link: "https://blog.froont.com/brief-history-of-web-design-for-designers/", desc: "Panorama histórico da evolução do web design voltado a designers." },
+    { nome: "Unicorn Designer Training Manual", categoria: "articles", link: "https://uxdesign.cc/unicorn-designer-training-manual-eb2439a10bc9", desc: "Manual e reflexão sobre as habilidades multidisciplinares esperadas de designers." },
+    { nome: "The Death of Click Here — CTA Best Practices", categoria: "articles", link: "https://medium.com/design-bootcamp/the-death-of-click-here-cta-best-practices-81e6af037025", desc: "Boas práticas para textos de chamadas para ação mais claros e acessíveis." },
+    { nome: "GitDiagram", categoria: "web development", link: "https://gitdiagram.com/", desc: "Ferramenta para visualizar a estrutura de repositórios como diagramas." },
+    { nome: "Wanna This — Free Mockups", categoria: "mockups", link: "https://wannathis.one/mockups/free", desc: "Coleção de mockups gratuitos para apresentar projetos e produtos." },
+    { nome: "Film-Grab", categoria: "visual search", link: "https://film-grab.com/", desc: "Acervo de frames de filmes para pesquisa e inspiração visual." },
+    { nome: "The Poster Database", categoria: "archives", link: "https://theposterdb.com/", desc: "Arquivo e catálogo de cartazes de filmes e séries." },
+    { nome: "Frameset — Wes Anderson", categoria: "visual search", link: "https://frameset.app/search/director/wes-anderson", desc: "Busca de frames cinematográficos por diretor, aqui filtrada para Wes Anderson." },
+    { nome: "Responsive Type Scales", categoria: "articles", link: "https://medium.com/sketch-app-sources/exploring-responsive-type-scales-cf1da541be54", desc: "Artigo sobre escalas tipográficas responsivas para interfaces e sites." },
+    { nome: "Free UX Templates — NNGroup", categoria: "articles", link: "https://www.nngroup.com/articles/free-ux-templates/?utm_source=chatgpt.com", desc: "Coleção de templates gratuitos para atividades e entregáveis de UX." },
+    { nome: "Title Art", categoria: "type tools", link: "https://titleart.dvy.io/", desc: "Referências visuais de artes e composições para títulos." },
+    { nome: "Angle Ref — Animal Bodies", categoria: "visual search", link: "https://angleref.com/animal/bodies?yaw=-100&pitch=-22&roll=-47", desc: "Referência 3D interativa de corpos de animais para estudo de formas e ângulos." },
+    { nome: "Moving Image Archive", categoria: "archives", link: "https://www.movingimagearchive.com/#browse", desc: "Acervo de filmes e imagens em movimento para consulta e pesquisa visual." },
     { nome: "Product Design Roadmap", categoria: "UX tools", link: "https://product-design-roadmap.com/", desc: "Guia passo a passo com as habilidades necessárias para se tornar um designer de produto." },
     { nome: "Daily UI", categoria: "learning tools", link: "https://www.dailyui.co/", desc: "Um desafio de 100 dias onde você recebe um prompt de design por e-mail para praticar suas habilidades de interface." },
     { nome: "UX Tools", categoria: "learning tools", link: "https://www.uxtools.co/challenges", desc: "Desafios práticos de design de experiência do usuário baseados em cenários reais do mercado." },
@@ -29,7 +62,14 @@
     { nome: "Flyer Archive JP", categoria: "archives", link: "https://flyer-jp.com/", desc: "Arquivo digital especializado em flyers e material gráfico japonês, servindo como fonte de inspiração estética." },
     { nome: "Archive PDF", categoria: "archives", link: "https://www.archivepdf.net/", desc: "Repositório de documentos PDF históricos e técnicos para consulta e pesquisa de design." },
     { nome: "Book Cover Archive", categoria: "archives", link: "https://bookcoverarchive.com/", desc: "Um arquivo dedicado à apreciação e estudo do design de capas de livros." },
-    { nome: "The Movie Database (TMDB)", categoria: "APIs", link: "https://www.themoviedb.org/?language=pt-BR", desc: "Banco de dados comunitário sobre cinema e TV, útil para referências de posters e metadados." },
+    { nome: "The Movie Database (TMDB)", categoria: "archives", link: "https://www.themoviedb.org/?language=pt-BR", desc: "Banco de dados comunitário sobre cinema e TV, útil para referências de posters e metadados." },
+    { nome: "Treejack — Optimal Workshop", categoria: "user testing & research", link: "https://www.optimalworkshop.com/tag/treejack", desc: "Recurso da Optimal Workshop sobre Treejack, ferramenta para testar arquitetura da informação." },
+    { nome: "Stedelijk Museum", categoria: "cases favoritos", link: "https://www.stedelijk.nl/nl", desc: "Site do Stedelijk Museum, salvo como referência em Cases Favoritos." },
+    { nome: "Google Fonts — Newsreader", categoria: "font style visualizer", licenca: "OFL", link: "https://fonts.google.com/specimen/Newsreader?preview.script=Latn", desc: "Família serifada Newsreader disponível no Google Fonts para visualização e uso tipográfico.", pesos: [400, 700] },
+    { nome: "Web Design Weekly", categoria: "newsletters", link: "https://web-design-weekly.com/", desc: "Newsletter semanal com novidades e recursos de web design." },
+    { nome: "Codrops Newsletter", categoria: "newsletters", link: "https://tympanus.net/codrops/newsletter/", desc: "Newsletter da Codrops com inspiração, tutoriais e recursos de design e desenvolvimento web." },
+    { nome: "Figmalion", categoria: "newsletters", link: "https://figmalion.com/", desc: "Newsletter e curadoria de recursos, novidades e referências para usuários do Figma." },
+    { nome: "Styleguides.io", categoria: "articles", link: "http://styleguides.io/", desc: "Coleção de referências e recursos sobre guias de estilo para produtos digitais." },
 
     // UX Tools
     { nome: "Fake Clients", categoria: "UX tools", link: "https://fakeclients.com/", desc: "Gerador de briefings de clientes fictícios para treinar habilidades de UX e design gráfico." },
@@ -329,7 +369,6 @@ const categoryOrder = [
     "illustrations",
     "icons / logos",
     "archives",
-    "APIs",
     "converter",
     "unpopular software list",
     "main download source", // Corrigido de "main download"
@@ -354,7 +393,6 @@ const categoryDefinitions = {
     "mockups": "Recursos de mockup para apresentação de marcas, interfaces, produtos e composições visuais.",
     "illustrations": "Bibliotecas de ilustrações, fotografias e recursos visuais para composições digitais.",
     "icons / logos": "Bibliotecas de ícones, símbolos, SVGs e referências para logos e sistemas visuais.",
-    "apis": "APIs, plataformas e serviços conectáveis para dados, autenticação, assinatura ou integrações.",
     "unpopular software list": "Curadoria de Softwares Utilitários e Open Source - Ferramentas de Otimização e Personalização de Sistema - Repositório de Softwares de Nicho e Alta Performance.",
     "main download source": "Repositórios Centrais de Software e Conhecimento - Fontes de Distribuição de Recursos Digitais - Centrais de Download para Produtividade e Pesquisa.",
     "converter": "Utilitários de Transformação de Dados - Ferramentas de Interoperabilidade e Formatação - Conversores de Estrutura para Desenvolvimento.",
@@ -387,7 +425,6 @@ const categoryIcons = {
     "mockups": "",
     "illustrations": "",
     "icons / logos": "",
-    "apis": "",
     "unpopular software list": "", 
     "main download source": "", 
     "converter": "",
@@ -438,7 +475,6 @@ const categorySymbols = {
     "mockups": "M",
     "illustrations": "◧",
     "icons / logos": "◇",
-    "apis": "API",
     "archives": "▤",
     "converter": "↔",
     "unpopular software list": "⌘",
@@ -475,7 +511,7 @@ function renderToolbox(filterText = '') {
     contentArea.innerHTML = '';
     const query = filterText.toLowerCase();
 
-    const limitedCategories = ["learning tools", "tutorials", "cases favoritos", "articles", "visual search", "archives", "apis", "ux tools", "user testing & research", "ui tools", "figma tools", "creative development", "color tools", "color pallete", "type tools", "font style visualizer", "styling tools", "mockups", "illustrations", "icons / logos", "unpopular software list", "main download source", "converter", "game 4 creatives", "guidelines", "design systems", "job boards", "newsletters"];
+    const limitedCategories = ["learning tools", "tutorials", "cases favoritos", "articles", "visual search", "archives", "ux tools", "user testing & research", "ui tools", "figma tools", "creative development", "color tools", "color pallete", "type tools", "font style visualizer", "styling tools", "mockups", "illustrations", "icons / logos", "unpopular software list", "main download source", "converter", "game 4 creatives", "guidelines", "design systems", "job boards", "newsletters"];
 
     categoryOrder.forEach(displayCat => {
         const lookupCat = displayCat.toLowerCase();
@@ -865,14 +901,14 @@ function renderNavbar() {
     uxPatchLink.href = 'uxpatch.html';
     uxPatchLink.innerHTML = '<span class="nav-link-icon">UX</span><span class="nav-link-label">UX Patch</span>';
 
+    const articlesLink = document.createElement('a');
+    articlesLink.className = 'nav-link nav-articles-featured';
+    articlesLink.href = '#articles';
+    articlesLink.innerHTML = `<span class="nav-link-icon">¶</span><span class="nav-link-label">Artigos</span><small>${getCategoryCount('articles')}</small>`;
+
     const libraryTitle = document.createElement('div');
     libraryTitle.className = 'nav-section-title';
     libraryTitle.textContent = 'Coleções';
-    const allTools = document.createElement('a');
-    allTools.className = 'nav-link nav-all-tools';
-    allTools.href = '#content';
-    allTools.innerHTML = `<span class="nav-link-icon">▦</span><span>Todas as ferramentas</span><small>${tools.length}</small>`;
-    navLinks.appendChild(allTools);
     navLinks.appendChild(libraryTitle);
 
     categoryOrder.forEach(cat => {
@@ -914,6 +950,7 @@ function renderNavbar() {
 
     navContent.appendChild(brand);
     navContent.appendChild(uxPatchLink);
+    navContent.appendChild(articlesLink);
     navContent.appendChild(navLinks);
     nav.appendChild(navContent);
     document.body.prepend(nav);
@@ -931,7 +968,7 @@ const moodboardSizes = [[1081,1081],[1350,1688],[1080,1350],[1440,1801],[1440,14
 const moodboardImageFiles = [
     ...[
         ['jpg', '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,107,109,110,113,114,115'],
-        ['png', '38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,65,66,67,68,69,71,72,74,75,76,78,79,80,81,82,84,86,87,88,89,91,93,94,96,97,100,101,102,103,105,108,111,112'],
+        ['png', '38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,65,66,67,68,69,71,72,74,75,76,78,79,81,82,84,86,87,88,89,91,93,94,96,97,100,101,102,103,105,108,111,112'],
         ['jpeg', '61,62,63,64,70,73,77,83,85,90,92,95,98,99,104,106']
     ].flatMap(([extension, numbers]) => numbers.split(',').map(number => `moodboard-${number}.${extension}`))
 ];
